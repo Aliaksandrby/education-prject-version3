@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,20 +51,20 @@ public class CarServiceImpl implements CarService {
 
     @Override
     @Transactional
-    public Car editCar(HttpServletRequest request, int id, MultipartFile[] images) throws IOException {
-        Car car = carDao.findById(id);
-        car.setName(request.getParameter("name"));
-        car.setYear(Integer.parseInt(request.getParameter("year")));
-        car.setEngineDescription(request.getParameter("engineDescription"));
-        car.setTransmission(request.getParameter("transmission"));
-        car.setPrice(Integer.parseInt(request.getParameter("price")));
-        carDao.update(car);
+    public Car editCar(Car car, int id, MultipartFile[] images) throws IOException {
+        Car car1 = carDao.findById(id);
+        car1.setName(car.getName());
+        car1.setYear(car.getYear());
+        car1.setEngineDescription(car.getEngineDescription());
+        car1.setTransmission(car.getTransmission());
+        car1.setPrice(car.getPrice());
+        carDao.update(car1);
         if (!(images.length == 1 && Objects.equals(images[0].getOriginalFilename(), ""))) {
-            deleteAllImagesFromTheCar(car);
+            deleteAllImagesFromTheCar(car1);
             List<ImageCar> imageCarList = addImagesToCar(car,images);
             car.setImageCarList(imageCarList);
         }
-        return carDao.findById(car.getId());
+        return carDao.findById(car1.getId());
     }
 
     private void deleteAllImagesFromTheCar(Car car) {

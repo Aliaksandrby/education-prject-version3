@@ -29,27 +29,42 @@
     </changeSet>
     <changeSet id="3" author="Aliaksandr.by">
         <sql>
-            CREATE TABLE IF NOT EXISTS t_role (
+            CREATE TABLE IF NOT EXISTS t_user (
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                name VARCHAR(20)
-            );
+                username VARCHAR(255),
+                password VARCHAR(255)
 
-            INSERT INTO t_role(id, name)
-            VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
+            );
         </sql>
     </changeSet>
-    <!--<changeSet id="4" author="Aliaksandr.by">
+    <changeSet id="4" author="Aliaksandr.by">
         <sql>
-            CREATE TABLE IF NOT EXISTS t_user_roles (
+            CREATE TABLE IF NOT EXISTS t_role (
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                user_id INT,
-                roles_id INT
+                name VARCHAR(100)
             );
-            INSERT INTO public.t_user_roles(user_id, roles_id)
-            VALUES (1, 2);
         </sql>
-    </changeSet>-->
-    <!--<changeSet id="2" author="Aliaksandr.by">
+    </changeSet>
+    <changeSet id="5" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_user_role (
+                user_id INT,
+                role_id INT,
+                FOREIGN KEY (user_id) REFERENCES t_user(id),
+                FOREIGN KEY (role_id) REFERENCES t_role(id),
+                UNIQUE (user_id,role_id)
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="6" author="Aliaksandr.by">
+        <sql>
+            INSERT INTO t_user VALUES (1, 'user', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG');
+            INSERT INTO t_role VALUES (1, 'ROLE_USER');
+            INSERT INTO t_role VALUES (2, 'ROLE_ADMIN');
+            INSERT INTO t_user_role VALUES (1, 2);
+        </sql>
+    </changeSet>
+    <!--<changeSet id="7" author="Aliaksandr.by">
         <sql>
             INSERT INTO t_car (name,year,engine_description,transmission,price)
             VALUES
