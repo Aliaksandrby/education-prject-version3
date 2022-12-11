@@ -1,0 +1,11 @@
+A {
+	text-decoration: none;
+}
+
+A {
+    color: #800000;
+}
+
+A:visited {
+    color: #800000;
+}

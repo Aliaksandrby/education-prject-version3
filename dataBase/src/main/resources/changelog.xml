@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_car (
+                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(200),
+                year INT,
+                engine_description VARCHAR(200),
+                transmission VARCHAR(100),
+                price INT
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="2" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_image_car (
+                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                car_id INT,
+                image MEDIUMBLOB,
+                FOREIGN KEY (car_id) REFERENCES t_car (id)
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="3" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_role (
+                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(20)
+            );
+
+            INSERT INTO t_role(id, name)
+            VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
+        </sql>
+    </changeSet>
+    <!--<changeSet id="4" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_user_roles (
+                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                user_id INT,
+                roles_id INT
+            );
+            INSERT INTO public.t_user_roles(user_id, roles_id)
+            VALUES (1, 2);
+        </sql>
+    </changeSet>-->
+    <!--<changeSet id="2" author="Aliaksandr.by">
+        <sql>
+            INSERT INTO t_car (name,year,engine_description,transmission,price)
+            VALUES
+            ('AUDI A7',2012,'gas/3000','automatic',100),
+            ('BMW 5 GRAN TURISMO',2012,'gas/3500','automatic',120),
+            ('BMW X1',2012,'gas/2000','automatic',80),
+            ('CITROEN C4',2012,'gas/1600','automatic',60),
+            ('KIA VENGA',2011,'gas/1600','automatic',50),
+            ('MERCEDES BENZ E CLASS W212',2013,'gas/1800','automatic',90),
+            ('PEJO 308',2010,'gas/1600','automatic',40),
+            ('PORSHE PANAMERA GTS',2014,'gas/4800','automatic',200),
+            ('SKODA RAPID',2016,'gas/1600','automatic',60),
+            ('VOLKSWAGEN CARAVELLE',2010,'disel/2200','automatic',90),
+            ('VOLKSWAGEN PASSAT CC',2013,'gas/1800','automatic',110),
+            ('VOLKSWAGEN POLO',2014,'gas/1600','automatic',50);
+    INSERT INTO t_image_car (car_id,image)
+    VALUES
+    (1,'/img/car/1/1.jpg'),(1,'/img/car/1/2.jpg'),(1,'/img/car/1/3.jpg'),(1,'/img/car/1/4.jpg'),
+    (2,'/img/car/2/1.jpg'),(2,'/img/car/2/2.jpg'),(2,'/img/car/2/3.jpg'),(2,'/img/car/2/4.jpg'),(2,'/img/car/2/5.jpg'),(2,'/img/car/2/6.jpg'),
+    (3,'/img/car/3/1.jpg'),(3,'/img/car/3/2.jpg'),(3,'/img/car/3/3.jpg'),(3,'/img/car/3/4.jpg'),
+    (4,'/img/car/4/1.jpg'),(4,'/img/car/4/2.jpg'),(4,'/img/car/4/3.jpg'),(4,'/img/car/4/4.jpg'),
+    (5,'/img/car/5/1.jpg'),(5,'/img/car/5/2.jpg'),(5,'/img/car/5/3.jpg'),
+    (6,'/img/car/6/1.jpg'),(6,'/img/car/6/2.jpg'),(6,'/img/car/6/3.jpg'),(6,'/img/car/6/4.jpg'),
+    (7,'/img/car/7/1.jpg'),(7,'/img/car/7/2.jpg'),(7,'/img/car/7/3.jpg'),(7,'/img/car/7/4.jpg'),(7,'/img/car/7/5.jpg'),
+    (8,'/img/car/8/1.jpg'),(8,'/img/car/8/2.jpg'),(8,'/img/car/8/3.jpg'),(8,'/img/car/8/4.jpg'),
+    (9,'/img/car/9/1.jpg'),(9,'/img/car/9/2.jpg'),(9,'/img/car/9/3.jpg'),(9,'/img/car/9/4.jpg'),
+    (10,'/img/car/10/1.jpg'),(10,'/img/car/10/2.jpg'),(10,'/img/car/10/3.jpg'),(10,'/img/car/10/4.jpg'),(10,'/img/car/10/5.jpg'),(10,'/img/car/10/6.jpg'),(10,'/img/car/10/7.jpg'),
+    (11,'/img/car/11/1.jpg'),(11,'/img/car/11/2.jpg'),(11,'/img/car/11/3.jpg'),(11,'/img/car/11/4.jpg'),(11,'/img/car/11/5.jpg'),(11,'/img/car/11/6.jpg'),
+    (12,'/img/car/12/1.jpg'),(12,'/img/car/12/2.jpg'),(12,'/img/car/12/3.jpg'),(12,'/img/car/12/4.jpg'),(12,'/img/car/12/5.jpg'),(12,'/img/car/12/6.jpg');
+</sql>
+</changeSet>-->
+
+</databaseChangeLog>

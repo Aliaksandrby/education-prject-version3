@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link th:href="@{/resources/css/carList.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/paging.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1 align="center">HAVE FUN WITH RENT AUTO</h1>
+
+<h3 align="center"><a href="/rent/add/car.html">add car</a></h3>
+<h3 align="center"><a href="/rent/users.html">edit/view users</a></h3>
+<h3 align="center"><a href="/rent/orders.html">edit/view orders</a></h3>
+<h3 align="center"><a href="/rent/payments.html">edit/view payments</a></h3>
+
+<div th:each="car : ${carList}">
+    <div id="avrDiv" class="warning">
+        <div align="center">
+            <a th:href="@{/car/{id}.html(id=${car.id})}">
+                <img th:src="${car.imageCarList.get(0).image.equals('')} ?
+                        @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{car.imageCarList.get(0).image}}">
+            </a>
+        </div>
+        <a th:href="@{/car/{id}.html(id=${car.id})}"><p th:text="${car.name}"></p></a>
+        <div align="center">
+            year: <span th:text="${car.year}"></span>
+            <br>
+            engine description: <span th:text="${car.engineDescription}"></span>
+            <br>
+            transmission: <span th:text="${car.transmission}"></span>
+            <br>
+            <b>price: <span th:text="${car.price}"></span></b>
+            <br>
+            <br>
+        </div>
+    </div>
+    <br>
+    <div align="center">
+        <button><a href="#">order</a></button>
+        <br>
+        <br>
+    </div>
+
+</div>
+
+<div class="center">
+    <div class="pagination">
+        <a th:text="${currentPage > 1} ? '&laquo;':''"
+           th:href="${currentPage == 1} ? '' : @{/{count}.html(count=${currentPage-1})}"></a>
+        <a th:each="i : ${#numbers.sequence(startPage, endPage)}"
+           th:href="@{/{i}.html(i=${i})}"
+           th:class="${i==currentPage && numberOfPages > 1} ? 'active'"
+           th:text="${numberOfPages < 2} ? '': ${i}"></a>
+        <a th:text="${currentPage < numberOfPages} ? '&raquo;':''"
+           th:href="${currentPage < numberOfPages} ? @{/{count}.html(count=${currentPage+1})}"></a>
+    </div>
+</div>
+
+</body>
+</html>

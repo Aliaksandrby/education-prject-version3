@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Car</title>
+</head>
+<body>
+<h1 align="center">add new car</h1>
+<h3 align="center"><a href="/rent">return to car list</a></h3>
+<div align="center">
+    <form method="post" action="/rent/add/car.html" enctype="multipart/form-data">
+
+        <label for="name">Name: </label><br>
+        <input type="text" id="name" name="name" value="Tesla Model S I" required><br> <!--placeholder=""-->
+
+        <label for="year">year: </label><br>
+        <input type="number" id="year" name="year" value="2014" required><br>
+
+        <label for="engineDescription">engineDescription: </label><br>
+        <input type="text" id="engineDescription" name="engineDescription" value="85kW" required><br>
+
+        <label for="transmission">transmission: </label><br>
+        <input type="text" id="transmission" name="transmission" value="automatic" required><br>
+
+        <label for="price">price: </label><br>
+        <input type="number" id="price" name="price" value="150" required><br>
+
+        <label for="images">images: </label><br>
+        <input type="file" id="images" name="images" multiple><br>
+
+        <br>
+        <input type="submit">
+    </form>
+</div>
+
+</body>
+</html>
