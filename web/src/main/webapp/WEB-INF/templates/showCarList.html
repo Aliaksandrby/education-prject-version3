@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
@@ -10,12 +11,20 @@
 <body>
 <h1 align="center">HAVE FUN WITH RENT AUTO</h1>
 
+<!--<div align="center" th:fragment="logout" class="logout"
+     sec:authorize="isAuthenticated()">
+    Logged user: <span sec:authentication="name">admin</span>
+    Roles: <span sec:authentication="principal.authorities">admin</span>
+    <form th:action="@{/logout}" method="post" style="display:inline"><input type="submit" value="Logout"/></form>
+</div>-->
+
 <h3 align="center"><a href="/rent/login.html">login</a></h3>
 <h3 align="center"><a href="/rent/registration.html">registration</a></h3>
 <h3 align="center"><a href="/rent/add/car.html">add car</a></h3>
-<h3 align="center"><a href="/rent/users.html">edit/view users</a></h3>
-<h3 align="center"><a href="/rent/orders.html">edit/view orders</a></h3>
-<h3 align="center"><a href="/rent/payments.html">edit/view payments</a></h3>
+<!--<h3 align="center"><a href="/rent/users.html">edit/view users</a></h3>-->
+<!--<h3 align="center"><a href="/rent/orders.html">edit/view orders</a></h3>-->
+<!--<h3 align="center"><a href="/rent/payments.html">edit/view payments</a></h3>-->
+<!--<h3 align="center"><a href="#">order this car</a></h3>-->
 
 <div th:each="car : ${carList}">
     <div id="avrDiv" class="warning">
@@ -39,12 +48,6 @@
         </div>
     </div>
     <br>
-    <div align="center">
-        <button><a href="#">order</a></button>
-        <br>
-        <br>
-    </div>
-
 </div>
 
 <div class="center">

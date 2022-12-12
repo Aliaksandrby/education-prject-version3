@@ -8,6 +8,7 @@
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<!--<div th:replace="index::logout"></div>-->
 <h1 align="center" th:text="${car.name}"></h1>
 <div id="main">
     <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">

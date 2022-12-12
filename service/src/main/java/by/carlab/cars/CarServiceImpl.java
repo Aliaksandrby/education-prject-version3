@@ -61,8 +61,8 @@ public class CarServiceImpl implements CarService {
         carDao.update(car1);
         if (!(images.length == 1 && Objects.equals(images[0].getOriginalFilename(), ""))) {
             deleteAllImagesFromTheCar(car1);
-            List<ImageCar> imageCarList = addImagesToCar(car,images);
-            car.setImageCarList(imageCarList);
+            List<ImageCar> imageCarList = addImagesToCar(car1,images);
+            car1.setImageCarList(imageCarList);
         }
         return carDao.findById(car1.getId());
     }

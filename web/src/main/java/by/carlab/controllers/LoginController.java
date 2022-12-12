@@ -13,10 +13,10 @@ public class LoginController {
         return "loginForm";
     }
 
-    @PostMapping("/login.html")
+    /*@PostMapping("/login.html")
     public String login(User user) {
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         return "redirect:/1.html";
-    }
+    }*/
 }
