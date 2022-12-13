@@ -9,18 +9,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-//@Configuration
-//@EnableWebSecurity
-public class SpringSecurityConfiguration {// extends WebSecurityConfigurerAdapter {
+@Configuration
+@EnableWebSecurity
+public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
 
 
-    /*public SpringSecurityConfiguration() {
+    public SpringSecurityConfiguration() {
         super();
-    }*/
+    }
 
-    /*@Autowired
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
@@ -36,10 +36,10 @@ public class SpringSecurityConfiguration {// extends WebSecurityConfigurerAdapte
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }*/
+    }
 
 
-    /*@Override
+    @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .formLogin()
@@ -50,7 +50,10 @@ public class SpringSecurityConfiguration {// extends WebSecurityConfigurerAdapte
                 .logoutSuccessUrl("/")
                 .and()
                 .authorizeRequests()
-                //.antMatchers("/add/**").permitAll()//hasRole("ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/add/**").hasRole("ADMIN")
+                .antMatchers("/edit/**").hasRole("ADMIN")
+                .antMatchers("/delete/**").hasRole("ADMIN")
                 //.antMatchers("/user/**").hasRole("USER")
                 //.antMatchers("/shared/**").hasAnyRole("USER","ADMIN")
                 .and()
@@ -60,7 +63,7 @@ public class SpringSecurityConfiguration {// extends WebSecurityConfigurerAdapte
     }
 
 
-    @Override
+    /*@Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()

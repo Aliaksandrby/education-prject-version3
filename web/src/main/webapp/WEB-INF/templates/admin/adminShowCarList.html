@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link th:href="@{/resources/css/carList.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/paging.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1 align="center">ADMIN PANEL</h1>
+<div th:replace="showCarList::logout"></div>
+<h3 align="center"><a href="/rent/add/car.html">add car</a></h3>
+<h3 align="center"><a href="/rent/users.html">edit/view users</a></h3>
+<h3 align="center"><a href="/rent/orders.html">edit/view orders</a></h3>
+<h3 align="center"><a href="/rent/payments.html">edit/view payments</a></h3>
+<h3 align="center"><a href="#">order this car</a></h3>
+<div th:replace="showCarList::CarList"></div>
+</body>
+</html>

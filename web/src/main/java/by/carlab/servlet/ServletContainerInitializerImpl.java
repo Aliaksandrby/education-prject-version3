@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 import java.util.Set;
 
-//@Order(1)
+@Order(1)
 public class ServletContainerInitializerImpl implements ServletContainerInitializer {
 
     @Override
@@ -23,7 +23,7 @@ public class ServletContainerInitializerImpl implements ServletContainerInitiali
         context.register(WebConfiguration.class);
         context.register(DataConfig.class);
         context.register(ServiceContextConfig.class);
-        //context.register(SecurityWebInitializer.class);
+        context.register(SecurityWebInitializer.class);
 
         DispatcherServlet dispatcherServlet =
                 new DispatcherServlet(context);

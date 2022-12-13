@@ -9,7 +9,7 @@
 <h1 align="center">add new car</h1>
 <h3 align="center"><a href="/rent">return to car list</a></h3>
 <div align="center">
-    <form method="post" action="/rent/add/car.html" enctype="multipart/form-data">
+    <form method="post" th:action="@{/add/car.html}" enctype="multipart/form-data">
 
         <label for="name">Name: </label><br>
         <input type="text" id="name" name="name" value="Tesla Model S I" required><br> <!--placeholder=""-->

@@ -11,21 +11,23 @@
 <body>
 <h1 align="center">HAVE FUN WITH RENT AUTO</h1>
 
-<!--<div align="center" th:fragment="logout" class="logout"
+<div align="center" th:fragment="logout" class="logout"
      sec:authorize="isAuthenticated()">
     Logged user: <span sec:authentication="name">admin</span>
     Roles: <span sec:authentication="principal.authorities">admin</span>
     <form th:action="@{/logout}" method="post" style="display:inline"><input type="submit" value="Logout"/></form>
-</div>-->
+</div>
 
-<h3 align="center"><a href="/rent/login.html">login</a></h3>
-<h3 align="center"><a href="/rent/registration.html">registration</a></h3>
-<h3 align="center"><a href="/rent/add/car.html">add car</a></h3>
+
+<!--<h3 align="center"><a href="/rent/add/car.html">add car</a></h3>-->
 <!--<h3 align="center"><a href="/rent/users.html">edit/view users</a></h3>-->
 <!--<h3 align="center"><a href="/rent/orders.html">edit/view orders</a></h3>-->
 <!--<h3 align="center"><a href="/rent/payments.html">edit/view payments</a></h3>-->
 <!--<h3 align="center"><a href="#">order this car</a></h3>-->
 
+<h3 align="center"><a href="/rent/admin/1.html">login</a></h3>
+<h3 align="center"><a href="/rent/registration.html">registration</a></h3>
+<div align="center" th:fragment="CarList">
 <div th:each="car : ${carList}">
     <div id="avrDiv" class="warning">
         <div align="center">
@@ -62,6 +64,6 @@
            th:href="${currentPage < numberOfPages} ? @{/{count}.html(count=${currentPage+1})}"></a>
     </div>
 </div>
-
+</div>
 </body>
 </html>

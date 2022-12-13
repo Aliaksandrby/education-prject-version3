@@ -6,8 +6,8 @@
 </head>
 <body>
 <div align="center">
-    <!--<p th:if="${loginError}" class="error">Wrong user or password</p>-->
-    <form method="post" action="/rent/login.html">
+    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <form th:action="@{/login.html}" method="post" >
 
         <label for="username">username: </label><br>
         <input type="text" id="username" name="username" placeholder="username" required><br>

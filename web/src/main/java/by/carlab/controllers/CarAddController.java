@@ -16,10 +16,12 @@ import java.io.IOException;
 public class CarAddController {
     @Autowired
     private CarService carService;
+
     @GetMapping("/add/car.html")
     public String addCar() {
         return "formForNewCar";
     }
+
     @PostMapping("/add/car.html")
     public String createCar(Car car, Model model, @RequestParam("images") MultipartFile[] images) throws IOException {
         System.out.println("create car");
