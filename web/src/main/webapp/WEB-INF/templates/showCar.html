@@ -2,37 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Car</title>
+    <title>Guest panel</title>
     <link th:href="@{/resources/css/car.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div align="center">
-    <h1 align="center" th:text="${car.name}"></h1>
-    <h3 align="center"><a th:href="@{/}">return to car list</a></h3>
-    <div id="main">
-        <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
-            <img th:src="${carImage.image.equals('')} ?
-                @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{carImage.image}}">
-        </div>
+<h3 align="center"><a th:href="@{/}">return to car list</a></h3>
+<h1 align="center" th:text="${car.name}"></h1>
+<div align="center" id="main">
+    <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
+        <img th:src="${carImage.image.equals('')} ?
+               @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{carImage.image}}">
     </div>
-
-    <h3 align="center"><strong>Description car</strong></h3>
-    <table class="rounded" align="center">
-        <tr>
-            <th>Release date</th>
-            <th>Engine description</th>
-            <th>Type transmission</th>
-            <th>Price per day</th>
-        </tr>
-        <tr>
-            <td th:text="${car.year}"></td>
-            <td th:text="${car.engineDescription}"></td>
-            <td th:text="${car.transmission}"></td>
-            <td th:text="${car.price}"></td>
-        </tr>
-    </table>
 </div>
+
+<h3 align="center"><strong>Description car</strong></h3>
+<table class="rounded" align="center">
+    <tr>
+        <th>Release date</th>
+        <th>Engine description</th>
+        <th>Type transmission</th>
+        <th>Price per day</th>
+    </tr>
+    <tr>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.engineDescription}"></td>
+        <td th:text="${car.transmission}"></td>
+        <td th:text="${car.price}"></td>
+    </tr>
+</table>
 </body>
 </html>

@@ -7,26 +7,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.Locale;
-
 @Controller
-public class CarShowListController {
+public class UserCarShowListController {
 
     @Autowired
     private PagingService pagingService;
 
-    @GetMapping("/")
-    public String showCarList() { // Locale locale
-        return "redirect:/1.html";
-    }
-
-    @GetMapping("/{currentPage}.html")
+    @GetMapping("/user/{currentPage}.html")
     public String viewCarList(Model model, @PathVariable("currentPage") int currentPage) {
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("startPage",pagingService.getStartPage(currentPage));
         model.addAttribute("endPage",pagingService.getEndPage(currentPage));
         model.addAttribute("numberOfPages",pagingService.getNumberOfPages());
         model.addAttribute("carList",pagingService.getCarPaging(currentPage));
-        return "showCarList";
+        return "user/showCarList";
     }
 }

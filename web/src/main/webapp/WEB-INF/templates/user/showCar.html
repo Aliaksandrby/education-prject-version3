@@ -3,21 +3,20 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Admin panel</title>
+    <title>User panel</title>
     <link th:href="@{/resources/css/car.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div align="center" th:fragment="logout" sec:authorize="isAuthenticated()">
-    <span sec:authentication="name">admin</span> |
-    <span sec:authentication="principal.authorities">admin</span> |
+    <span sec:authentication="name">user</span> |
+    <span sec:authentication="principal.authorities">user</span> |
     <form th:action="@{/logout}" method="post"><input type="submit" value="Logout"/></form>
 </div>
-<h1 align="center"><button><a th:href="@{/admin/delete/car/{id}.html(id=${car.id})}">delete this car</a></button></h1>
 <div align="center">
     <h1 align="center" th:text="${car.name}"></h1>
-    <h3 align="center"><a th:href="@{/admin/1.html}">return to car list</a></h3>
+    <h3 align="center"><a th:href="@{/user/1.html}">return to car list</a></h3>
     <div id="main">
         <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
             <img th:src="${carImage.image.equals('')} ?
@@ -42,31 +41,5 @@
     </table>
 </div>
 <h3 align="center"><a th:href="@{/admin/1.html}">order this car</a></h3>
-<h3 align="center">Edit this car</h3>
-<div align="center">
-    <form th:action="@{/admin/edit/car/{id}.html(id=${car.id})}" method="post" enctype="multipart/form-data">
-
-        <label for="name">Name car: </label><br>
-        <input type="text" id="name" name="name" th:value="${car.name}"><br>
-
-        <label for="year">Year car: </label><br>
-        <input type="number" id="year" name="year" th:value="${car.year}"><br>
-
-        <label for="engineDescription">Engine Description: </label><br>
-        <input type="text" id="engineDescription" name="engineDescription" th:value="${car.engineDescription}"><br>
-
-        <label for="transmission">Type transmission: </label><br>
-        <input type="text" id="transmission" name="transmission" th:value="${car.transmission}"><br>
-
-        <label for="price">Price: </label><br>
-        <input type="number" id="price" name="price" th:value="${car.price}"><br>
-
-        <label for="images">images: </label><br>
-        <input type="file" id="images" multiple name="images"><br><br>
-
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <input type="submit">
-    </form>
-</div>
 </body>
 </html>

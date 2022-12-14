@@ -47,23 +47,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/admin/**").hasRole("ADMIN")
+                    .antMatchers("/user/**").hasRole("USER")
                 .and()
                     .exceptionHandling()
                     .accessDeniedPage("/403.html")
                 .and()
-                .csrf()
-                .ignoringAntMatchers("/admin/**");
+                    .csrf()
+                    .ignoringAntMatchers("/admin/**");
 
     }
-
-    /*@Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("admin").password("{noop}demo").roles("ADMIN")
-                .and()
-                .withUser("user").password("{noop}demo").roles("USER");
-                //.and()
-                //.withUser("ted").password("{noop}demo").roles("USER","ADMIN");
-    }*/
 }

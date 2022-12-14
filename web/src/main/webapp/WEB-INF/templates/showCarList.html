@@ -2,34 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>Guest panel</title>
     <link th:href="@{/resources/css/carList.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/paging.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1 align="center">HAVE FUN WITH RENT AUTO</h1>
-<h3 align="center"><a th:href="@{/admin/1.html}">login</a></h3>
+<h3 align="center"><a th:href="@{/admin/1.html}">login admin</a></h3>
+<h3 align="center"><a th:href="@{/user/1.html}">login user</a></h3>
+
 <h3 align="center"><a th:href="@{/registration.html}">registration</a></h3>
-<div align="center">
-    <div th:each="car : ${carList}">
-        <div id="avrDiv" class="warning">
+
+<div align="center" th:each="car : ${carList}">
+    <div id="avrDiv" class="warning">
+        <a th:href="@{/car/{id}.html(id=${car.id})}">
             <div align="center">
-                <a th:href="@{/car/{id}.html(id=${car.id})}">
-                    <img th:src="${car.imageCarList.get(0).image.equals('')} ?
-                            @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{car.imageCarList.get(0).image}}">
-                </a>
+                <img th:src="${car.imageCarList.get(0).image.equals('')} ?
+                    @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{car.imageCarList.get(0).image}}">
             </div>
-            <a th:href="@{/car/{id}.html(id=${car.id})}"><p th:text="${car.name}"></p></a>
+            <p th:text="${car.name}"></p>
             <div align="center">
                 year: <span th:text="${car.year}"></span><br>
                 engine description: <span th:text="${car.engineDescription}"></span><br>
                 transmission: <span th:text="${car.transmission}"></span><br>
-                <b>price: <span th:text="${car.price}"></span></b><br><br>
+                price: <span th:text="${car.price}"></span><br><br>
             </div>
-        </div><br>
-    </div>
+        </a>
+    </div><br>
 </div>
+
 <div class="center">
     <div class="pagination">
         <a th:text="${currentPage > 1} ? '&laquo;':''"
