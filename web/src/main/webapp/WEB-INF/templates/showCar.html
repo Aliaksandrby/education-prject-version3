@@ -8,55 +8,31 @@
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<!--<div th:replace="index::logout"></div>-->
-<h1 align="center" th:text="${car.name}"></h1>
-<div id="main">
-    <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
-        <img th:src="${carImage.image.equals('')} ? @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{carImage.image}}">
-    </div>
-</div>
-<h3 align="center"><a href="/rent">return to car list</a></h3>
-<h1 align="center"><button><a th:href="@{/delete/car/{id}.html(id=${car.id})}">delete this car</a></button></h1>
-<h3 align="center"><strong>Description car</strong></h3>
-<table class="rounded" align="center">
-    <tr>
-        <th>Release date</th>
-        <th>Engine description</th>
-        <th>Type transmission</th>
-        <th>Price per day</th>
-    </tr>
-    <tr>
-        <td th:text="${car.year}"></td>
-        <td th:text="${car.engineDescription}"></td>
-        <td th:text="${car.transmission}"></td>
-        <td th:text="${car.price}"></td>
-    </tr>
-</table>
-<h3 align="center">Edit this car</h3>
 <div align="center">
-    <form th:action="@{/edit/car/{id}.html(id=${car.id})}" method="post" enctype="multipart/form-data">
+    <h1 align="center" th:text="${car.name}"></h1>
+    <h3 align="center"><a th:href="@{/}">return to car list</a></h3>
+    <div id="main">
+        <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
+            <img th:src="${carImage.image.equals('')} ?
+                @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{carImage.image}}">
+        </div>
+    </div>
 
-        <label for="name">Name car: </label><br>
-        <input type="text" id="name" name="name" th:value="${car.name}"><br>
-
-        <label for="year">Year car: </label><br>
-        <input type="number" id="year" name="year" th:value="${car.year}"><br>
-
-        <label for="engineDescription">Engine Description: </label><br>
-        <input type="text" id="engineDescription" name="engineDescription" th:value="${car.engineDescription}"><br>
-
-        <label for="transmission">Type transmission: </label><br>
-        <input type="text" id="transmission" name="transmission" th:value="${car.transmission}"><br>
-
-        <label for="price">Price: </label><br>
-        <input type="number" id="price" name="price" th:value="${car.price}"><br>
-
-        <label for="images">images: </label><br>
-        <input type="file" id="images" multiple name="images"><br>
-
-        <br>
-        <input type="submit">
-    </form>
+    <h3 align="center"><strong>Description car</strong></h3>
+    <table class="rounded" align="center">
+        <tr>
+            <th>Release date</th>
+            <th>Engine description</th>
+            <th>Type transmission</th>
+            <th>Price per day</th>
+        </tr>
+        <tr>
+            <td th:text="${car.year}"></td>
+            <td th:text="${car.engineDescription}"></td>
+            <td th:text="${car.transmission}"></td>
+            <td th:text="${car.price}"></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

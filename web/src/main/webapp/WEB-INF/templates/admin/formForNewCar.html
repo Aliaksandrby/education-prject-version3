@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Add Car</title>
+    <title>Add car</title>
 </head>
 <body>
-<!--<div th:replace="index::logout"></div>-->
-<h1 align="center">add new car</h1>
-<h3 align="center"><a href="/rent">return to car list</a></h3>
+<h1 align="center">ADD NEW CAR</h1>
+<!--<div th:replace="fragments::logout"></div>-->
+<div align="center" th:fragment="logout" sec:authorize="isAuthenticated()">
+    <span sec:authentication="name">admin</span> |
+    <span sec:authentication="principal.authorities">admin</span> |
+    <form th:action="@{/logout}" method="post"><input type="submit" value="Logout"/></form>
+</div>
+<h3 align="center"><a th:href="@{/admin/1.html}">return to car list</a></h3>
 <div align="center">
-    <form method="post" th:action="@{/add/car.html}" enctype="multipart/form-data">
+    <form th:action="@{/admin/add/car.html}" enctype="multipart/form-data" method="post">
 
         <label for="name">Name: </label><br>
         <input type="text" id="name" name="name" value="Tesla Model S I" required><br> <!--placeholder=""-->
@@ -30,7 +36,9 @@
         <input type="file" id="images" name="images" multiple><br>
 
         <br>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit">
+
     </form>
 </div>
 

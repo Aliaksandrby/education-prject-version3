@@ -13,9 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
-
-
     public SpringSecurityConfiguration() {
         super();
     }
@@ -38,30 +35,26 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http
-                .formLogin()
-                .loginPage("/login.html")
-                .failureUrl("/login-error.html")
+                    .formLogin()
+                    //.loginPage("/login.html")
+                    //.failureUrl("/login-error.html")
                 .and()
-                .logout()
-                .logoutSuccessUrl("/")
+                    .logout()
+                    .logoutSuccessUrl("/")
                 .and()
-                .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/add/**").hasRole("ADMIN")
-                .antMatchers("/edit/**").hasRole("ADMIN")
-                .antMatchers("/delete/**").hasRole("ADMIN")
-                //.antMatchers("/user/**").hasRole("USER")
-                //.antMatchers("/shared/**").hasAnyRole("USER","ADMIN")
+                    .authorizeRequests()
+                    .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
-                .exceptionHandling()
-                .accessDeniedPage("/403.html");
+                    .exceptionHandling()
+                    .accessDeniedPage("/403.html")
+                .and()
+                .csrf()
+                .ignoringAntMatchers("/admin/**");
 
     }
-
 
     /*@Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -73,8 +66,4 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.and()
                 //.withUser("ted").password("{noop}demo").roles("USER","ADMIN");
     }*/
-
-
-
-
 }

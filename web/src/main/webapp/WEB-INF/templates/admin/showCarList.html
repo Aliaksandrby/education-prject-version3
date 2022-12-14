@@ -1,26 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Main page</title>
+    <title>Admin panel</title>
     <link th:href="@{/resources/css/carList.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/paging.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1 align="center">HAVE FUN WITH RENT AUTO</h1>
-<h3 align="center"><a th:href="@{/admin/1.html}">login</a></h3>
-<h3 align="center"><a th:href="@{/registration.html}">registration</a></h3>
+<h1 align="center">ADMIN PANEL</h1>
+<div align="center" th:fragment="logout" sec:authorize="isAuthenticated()">
+    <span sec:authentication="name">admin</span> |
+    <span sec:authentication="principal.authorities">admin</span> |
+    <form th:action="@{/logout}" method="post"><input type="submit" value="Logout"/></form>
+</div>
+<!--<div sec:authorize="hasRole('ROLE_ADMIN')">-->
+<!--<div th:replace="fragments::logout"></div>-->
+<h3 align="center"><a th:href="@{/admin/add/car.html}">add car</a></h3>
+<h3 align="center"><a th:href="@{/users.html}">edit/view users</a></h3>
+<h3 align="center"><a th:href="@{/orders.html}">edit/view orders</a></h3>
+<h3 align="center"><a th:href="@{/payments.html}">edit/view payments</a></h3>
+<h3 align="center"><a th:href="@{/admin/1.html}">order this car</a></h3>
+
 <div align="center">
     <div th:each="car : ${carList}">
         <div id="avrDiv" class="warning">
             <div align="center">
-                <a th:href="@{/car/{id}.html(id=${car.id})}">
+                <a th:href="@{/admin/car/{id}.html(id=${car.id})}">
                     <img th:src="${car.imageCarList.get(0).image.equals('')} ?
                             @{/resources/img/noAuto.png} : ${'data:image/jpeg;base64,'+{car.imageCarList.get(0).image}}">
                 </a>
             </div>
-            <a th:href="@{/car/{id}.html(id=${car.id})}"><p th:text="${car.name}"></p></a>
+            <a th:href="@{/admin/car/{id}.html(id=${car.id})}"><p th:text="${car.name}"></p></a>
             <div align="center">
                 year: <span th:text="${car.year}"></span><br>
                 engine description: <span th:text="${car.engineDescription}"></span><br>
@@ -33,14 +45,15 @@
 <div class="center">
     <div class="pagination">
         <a th:text="${currentPage > 1} ? '&laquo;':''"
-           th:href="${currentPage == 1} ? '' : @{/{count}.html(count=${currentPage-1})}"></a>
+           th:href="${currentPage == 1} ? '' : @{/admin/{count}.html(count=${currentPage-1})}"></a>
         <a th:each="i : ${#numbers.sequence(startPage, endPage)}"
-           th:href="@{/{i}.html(i=${i})}"
+           th:href="@{/admin/{i}.html(i=${i})}"
            th:class="${i==currentPage && numberOfPages > 1} ? 'active'"
            th:text="${numberOfPages < 2} ? '': ${i}"></a>
         <a th:text="${currentPage < numberOfPages} ? '&raquo;':''"
-           th:href="${currentPage < numberOfPages} ? @{/{count}.html(count=${currentPage+1})}"></a>
+           th:href="${currentPage < numberOfPages} ? @{/admin/{count}.html(count=${currentPage+1})}"></a>
     </div>
 </div>
+<!--</div>-->
 </body>
 </html>
