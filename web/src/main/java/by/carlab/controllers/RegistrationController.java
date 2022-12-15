@@ -10,7 +10,7 @@ public class RegistrationController {
 
     @GetMapping("/registration.html")
     public String registration() {
-        return "registrationForm";
+        return "registration";
     }
 
     @PostMapping("/registration.html")

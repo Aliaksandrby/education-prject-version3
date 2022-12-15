@@ -17,12 +17,12 @@ public class AdminCarAddController {
 
     @GetMapping("/admin/add/car.html")
     public String addCar() {
-        return "admin/formForNewCar";
+        return "formForNewCar";
     }
 
     @PostMapping("/admin/add/car.html")
     public String createCar(Car car, Model model, @RequestParam("images") MultipartFile[] images) throws IOException {
         model.addAttribute("car",carService.addCar(car, images));
-        return "admin/showCar";
+        return "showCar";
     }
 }

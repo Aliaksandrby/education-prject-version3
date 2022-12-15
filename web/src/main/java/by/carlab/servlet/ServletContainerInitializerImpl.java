@@ -23,7 +23,7 @@ public class ServletContainerInitializerImpl implements ServletContainerInitiali
         context.register(WebConfiguration.class);
         context.register(DataConfig.class);
         context.register(ServiceContextConfig.class);
-        context.register(SecurityWebInitializer.class);
+        //context.register(SecurityWebInitializer.class);
 
         DispatcherServlet dispatcherServlet =
                 new DispatcherServlet(context);

@@ -20,6 +20,6 @@ public class AdminCarEditController {
     public String editCar(Car car, Model model, @PathVariable("id") int id,
                           @RequestParam("images") MultipartFile[] images) throws IOException {
         model.addAttribute("car",carService.editCar(car,id,images));
-        return "admin/showCar";
+        return "showCar";
     }
 }

@@ -14,6 +14,6 @@ public class AdminCarDeleteController {
     @GetMapping("/admin/delete/car/{id}.html")
     public String deleteCar(Model model, @PathVariable("id") int id) {
         carService.deleteCar(id);
-        return "redirect:/admin/1.html";
+        return "redirect:/1.html";
     }
 }
