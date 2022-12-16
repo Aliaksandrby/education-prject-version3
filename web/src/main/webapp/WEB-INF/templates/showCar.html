@@ -11,12 +11,10 @@
 </head>
 <body>
 <h1 align="center" th:text="${car.name}"></h1>
-<div sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
-    <h1 align="center"><button><a th:href="@{/order/car/{id}.html(id=${car.id})}">order</a></button></h1>
-</div>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <h1 align="center"><button><a th:href="@{/admin/delete/car/{id}.html(id=${car.id})}">delete</a></button></h1>
-</div>
+<div th:replace="fragments::logout"></div>
+<div th:replace="fragments::order"></div>
+<div th:replace="fragments::delete"></div>
+<div th:replace="fragments::returnToCarList"></div>
 <div align="center" id="main">
     <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
         <img th:src="${carImage.image.equals('')} ?
@@ -39,8 +37,6 @@
         <td th:text="${car.price}"></td>
     </tr>
 </table>
-<div th:replace="fragments::logout"></div>
-<h1 align="center"><button><a th:href="@{/}">return to car list</a></button></h1>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
     <h3 align="center">Edit this car</h3>
     <div align="center">

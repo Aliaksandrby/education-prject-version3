@@ -6,10 +6,76 @@
     <title>fragments</title>
 </head>
 <body>
-<div align="center" class="container" th:fragment="logout" sec:authorize="isAuthenticated()">
+
+<div class="container" th:fragment="logout" sec:authorize="isAuthenticated()">
     <form class="form-signin" method="post" th:action="@{/logout}">
         <button class="btn btn-lg btn-primary btn-block" type="submit">logout</button>
     </form>
 </div>
+
+<div class="container" th:fragment="login" sec:authorize="isAuthenticated()==false">
+    <form class="form-signin" method="post" th:action="@{/login.html}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">login</button>
+    </form>
+</div>
+
+<div class="container" th:fragment="registration" sec:authorize="isAuthenticated()==false">
+    <a th:href="@{/registration.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            registration
+        </button>
+    </a>
+</div>
+
+<div class="container" th:fragment="administration" sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/admin/add/car.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            add car
+        </button>
+    </a>
+    <p></p>
+    <a th:href="@{/admin/editViewUsers.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            edit/view users
+        </button>
+    </a>
+    <p></p>
+    <a th:href="@{/admin/editViewOrders.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            edit/view orders
+        </button>
+    </a>
+    <p></p>
+    <a th:href="@{/admin/editViewPayments.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            edit/view payments
+        </button>
+    </a>
+</div>
+
+<div class="container" th:fragment="returnToCarList">
+    <a th:href="@{/}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            return to carList
+        </button>
+    </a>
+</div>
+
+<div class="container" th:fragment="order" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
+    <a th:href="@{/order/car/{id}.html(id=${car.id})}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            order
+        </button>
+    </a>
+</div>
+
+<div class="container" th:fragment="delete" sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/admin/delete/car/{id}.html(id=${car.id})}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            delete
+        </button>
+    </a>
+</div>
+
 </body>
 </html>

@@ -14,6 +14,6 @@ public class LoginController {
 
     @PostMapping("/login.html")
     public String loginAdmin() {
-        return "redirect:/admin/1.html";
+        return "redirect:/";
     }
 }

@@ -53,7 +53,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .accessDeniedPage("/403.html")
                 .and()
                     .csrf()
-                    .ignoringAntMatchers("/admin/**");
+                    .ignoringAntMatchers("/**");
 
                 /*.csrf()
                 .disable()

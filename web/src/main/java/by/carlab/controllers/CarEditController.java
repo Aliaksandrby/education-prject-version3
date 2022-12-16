@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Controller
-public class AdminCarEditController {
+public class CarEditController {
     @Autowired
     private CarService carService;
     @PostMapping("/admin/edit/car/{id}.html")

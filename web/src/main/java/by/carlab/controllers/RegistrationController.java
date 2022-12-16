@@ -18,6 +18,6 @@ public class RegistrationController {
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         System.out.println(user.getConfirmPassword());
-        return "redirect:/1.html";
+        return "redirect:/";
     }
 }

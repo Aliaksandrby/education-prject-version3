@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-public class AdminCarDeleteController {
+public class CarDeleteController {
     @Autowired
     private CarService carService;
     @GetMapping("/admin/delete/car/{id}.html")

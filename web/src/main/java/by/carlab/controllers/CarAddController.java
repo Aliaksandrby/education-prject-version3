@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Controller
-public class AdminCarAddController {
+public class CarAddController {
     @Autowired
     private CarService carService;
 

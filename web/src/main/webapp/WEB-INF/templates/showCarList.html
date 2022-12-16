@@ -11,22 +11,10 @@
 </head>
 <body>
 <div th:replace="fragments::logout"></div>
-<div class="container" sec:authorize="isAuthenticated()==false">
-    <form class="form-signin" method="post" th:action="@{/login.html}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">login</button>
-    </form>
-</div>
-<div class="container" sec:authorize="isAuthenticated()==false">
-    <form class="form-signin" method="post" th:action="@{/registration.html}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">registration</button>
-    </form>
-</div>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <h1 align="center"><button><a th:href="@{/admin/add/car.html}">add car</a></button></h1>
-    <h1 align="center"><button><a th:href="@{/admin/editViewUsers.html}">edit/view users</a></button></h1>
-    <h1 align="center"><button><a th:href="@{/admin/editViewOrders.html}">edit/view orders</a></button></h1>
-    <h1 align="center"><button><a th:href="@{/admin/editViewPayments.html}">edit/view payments</a></button></h1>
-</div>
+<div th:replace="fragments::login"></div>
+<div th:replace="fragments::registration"></div>
+<div th:replace="fragments::administration"></div>
+<p></p>
 <div align="center" th:each="car : ${carList}">
     <div id="avrDiv" class="warning">
         <a th:href="@{/car/{id}.html(id=${car.id})}">
