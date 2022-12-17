@@ -1,4 +1,4 @@
-package by.carlab.controllers;
+package by.carlab.controllers.cars;
 
 import by.carlab.cars.CarService;
 import org.springframework.beans.factory.annotation.Autowired;

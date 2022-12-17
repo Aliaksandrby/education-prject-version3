@@ -1,4 +1,4 @@
-package by.carlab.controllers;
+package by.carlab.controllers.login;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

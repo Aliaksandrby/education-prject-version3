@@ -33,7 +33,6 @@
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 username VARCHAR(255),
                 password VARCHAR(255)
-
             );
         </sql>
     </changeSet>
@@ -47,24 +46,29 @@
     </changeSet>
     <changeSet id="5" author="Aliaksandr.by">
         <sql>
-            CREATE TABLE IF NOT EXISTS t_user_role (
+            CREATE TABLE IF NOT EXISTS t_user_roles (
                 user_id INT,
                 role_id INT,
-                FOREIGN KEY (user_id) REFERENCES t_user(id),
-                FOREIGN KEY (role_id) REFERENCES t_role(id),
-                UNIQUE (user_id,role_id)
+                FOREIGN KEY (user_id) REFERENCES t_user (id),
+                FOREIGN KEY (role_id)  REFERENCES t_role (id)
             );
         </sql>
     </changeSet>
     <changeSet id="6" author="Aliaksandr.by">
         <sql>
-            INSERT INTO t_user VALUES (1, 'user', '$2a$11$uSXS6rLJ91WjgOHhEGDx..VGs7MkKZV68Lv5r1uwFu7HgtRn3dcXG');
-            INSERT INTO t_role VALUES (1, 'ROLE_USER');
-            INSERT INTO t_role VALUES (2, 'ROLE_ADMIN');
-            INSERT INTO t_user_role VALUES (1, 2);
+            INSERT INTO t_role(id, name) VALUES (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
         </sql>
     </changeSet>
-    <!--<changeSet id="7" author="Aliaksandr.by">
+    <changeSet id="7" author="Aliaksandr.by">
+        <sql>
+            INSERT INTO t_user(id, username,password)
+            VALUES (1, 'admin','$2a$10$oLjEcISCg9p7FPicTn4bKOzC6EYYxSmXiid2UxdJILuQdlZYAx1Ba');
+
+            INSERT INTO t_user_roles
+            VALUES (1,2);
+        </sql>
+    </changeSet>
+    <!--<changeSet id="8" author="Aliaksandr.by">
         <sql>
             INSERT INTO t_car (name,year,engine_description,transmission,price)
             VALUES

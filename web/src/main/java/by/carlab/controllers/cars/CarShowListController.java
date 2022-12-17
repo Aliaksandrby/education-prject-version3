@@ -1,13 +1,12 @@
-package by.carlab.controllers;
+package by.carlab.controllers.cars;
 
 import by.carlab.cars.PagingService;
+import by.carlab.cars.PagingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.Locale;
 
 @Controller
 public class CarShowListController {
@@ -23,10 +22,10 @@ public class CarShowListController {
     @GetMapping("/{currentPage}.html")
     public String viewCarList(Model model, @PathVariable("currentPage") int currentPage) {
         model.addAttribute("currentPage",currentPage);
-        model.addAttribute("startPage",pagingService.getStartPage(currentPage));
-        model.addAttribute("endPage",pagingService.getEndPage(currentPage));
-        model.addAttribute("numberOfPages",pagingService.getNumberOfPages());
-        model.addAttribute("carList",pagingService.getCarPaging(currentPage));
+        model.addAttribute("startPage", pagingService.getStartPage(currentPage));
+        model.addAttribute("endPage", pagingService.getEndPage(currentPage));
+        model.addAttribute("numberOfPages", pagingService.getNumberOfPages());
+        model.addAttribute("carList", pagingService.getCarPaging(currentPage));
         return "showCarList";
     }
 }

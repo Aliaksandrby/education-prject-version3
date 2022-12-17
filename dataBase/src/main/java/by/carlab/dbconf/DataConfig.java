@@ -2,6 +2,8 @@ package by.carlab.dbconf;
 
 import by.carlab.model.Car;
 import by.carlab.model.ImageCar;
+import by.carlab.model.Role;
+import by.carlab.model.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,7 +70,9 @@ public class DataConfig {
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setAnnotatedClasses(
                 Car.class,
-                ImageCar.class
+                ImageCar.class,
+                User.class,
+                Role.class
         );
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;

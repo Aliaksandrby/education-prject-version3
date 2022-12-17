@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 @Transactional
@@ -47,11 +46,12 @@ public class UserDaoImpl implements UserDao {
     public User findByUsername(String username) {
         User user = null;
         for (User usr : readAll()) {
-            if(Objects.equals(usr.getUsername(), username)) {
+            if(usr.getUsername().equals(username)) {
                 user = usr;
                 break;
             }
         }
         return user;
     }
+
 }
