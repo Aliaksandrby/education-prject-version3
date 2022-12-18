@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,11 +29,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void createUser(User user) {
-
         User userNew = new User();
-
         if(isPasswordEqualsToConfirmPassword(user) && hasUsernameIntoDB(user)) {
             userNew.setUsername(user.getUsername());
+            userNew.setEmail(user.getEmail());
             userNew.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userNew.setRoleSet(Set.of(roleDao.findById(1)));
             userDao.create(userNew);
@@ -40,8 +40,6 @@ public class UserServiceImpl implements UserService {
             System.out.println("password is bad"); //TODO: message to page
             System.out.println("login is bad"); //TODO: message to page
         }
-
-
     }
 
     @Override
@@ -53,6 +51,32 @@ public class UserServiceImpl implements UserService {
     public boolean hasUsernameIntoDB(User user) {
         User userFound = userDao.findByUsername(user.getUsername());
         return userFound == null;
+    }
+
+    @Override
+    public List<User> readAll() {
+        return userDao.readAll();
+    }
+
+    @Override
+    public User findById(int id) {
+        return userDao.findById(id);
+    }
+
+    @Override
+    public void deleteUser(int id) {
+        userDao.delete(id);
+    }
+
+    @Override
+    public User editUser(User user, int id, int roleId) { // TODO: email and checking everything
+        User editUser = findById(id);
+        editUser.setUsername(user.getUsername());
+        editUser.setEmail(user.getEmail());
+        editUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        editUser.setRoleSet(Set.of(roleDao.findById(roleId)));
+        userDao.update(editUser);
+        return editUser;
     }
 
     @Override

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View user list</title>
+    <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <h1 align="center">User List</h1>
+    <div th:replace="fragments::returnToCarList"></div>
+    <br>
+    <div th:replace="fragments::logout"></div>
+    <br>
+    <table class="rounded" align="center">
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>RoleSet</th>
+            <th>Act</th>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.password}"></td>
+            <td><span th:each="role : ${user.roleSet}" th:text="${role.name}"></span></td>
+            <td>
+                <a th:href="@{/admin/user/{id}.html(id=${user.id})}">
+                    <button>show</button>
+                </a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

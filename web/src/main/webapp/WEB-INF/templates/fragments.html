@@ -34,7 +34,7 @@
         </button>
     </a>
     <p></p>
-    <a th:href="@{/admin/editViewUsers.html}">
+    <a th:href="@{/admin/showUserList.html}">
         <button class="btn btn-lg btn-primary btn-block form-signin">
             edit/view users
         </button>
@@ -73,6 +73,22 @@
     <a th:href="@{/admin/delete/car/{id}.html(id=${car.id})}">
         <button class="btn btn-lg btn-primary btn-block form-signin">
             delete
+        </button>
+    </a>
+</div>
+
+<div class="container" th:fragment="deleteUser" sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/admin/delete/user/{id}.html(id=${user.id})}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            delete
+        </button>
+    </a>
+</div>
+
+<div class="container" th:fragment="returnToUserList" sec:authorize="hasRole('ROLE_ADMIN')">
+    <a th:href="@{/admin/showUserList.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            return to user list
         </button>
     </a>
 </div>

@@ -12,8 +12,8 @@ public class CarDeleteController {
     @Autowired
     private CarService carService;
     @GetMapping("/admin/delete/car/{id}.html")
-    public String deleteCar(Model model, @PathVariable("id") int id) {
+    public String deleteCar(@PathVariable("id") int id) {
         carService.deleteCar(id);
-        return "redirect:/1.html";
+        return "redirect:/";
     }
 }

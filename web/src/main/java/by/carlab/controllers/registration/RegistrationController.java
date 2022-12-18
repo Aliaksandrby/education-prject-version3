@@ -20,12 +20,9 @@ public class RegistrationController {
 
     @PostMapping ("/registration.html")
     public String registration(User user) {
-        System.out.println("##################################################################");
-
-
-
+        System.out.println("#################################################################################");
+        System.out.println(user.getEmail());
         userService.createUser(user);
-        System.out.println("##################################################################");
         return "redirect:/";
     }
 }

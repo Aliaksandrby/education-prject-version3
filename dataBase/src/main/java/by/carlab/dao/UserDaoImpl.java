@@ -31,9 +31,15 @@ public class UserDaoImpl implements UserDao {
         sessionFactory.getCurrentSession().update(user);
     }
 
-    @Override
+    /*@Override
     public void delete(User user) {
         User loadedUser = sessionFactory.getCurrentSession().load(User.class, user.getId());
+        sessionFactory.getCurrentSession().delete(loadedUser);
+    }*/
+
+    @Override
+    public void delete(int id) {
+        User loadedUser = sessionFactory.getCurrentSession().load(User.class, id);
         sessionFactory.getCurrentSession().delete(loadedUser);
     }
 

@@ -32,6 +32,7 @@
             CREATE TABLE IF NOT EXISTS t_user (
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 username VARCHAR(255),
+                email VARCHAR(100),
                 password VARCHAR(255)
             );
         </sql>
@@ -61,8 +62,8 @@
     </changeSet>
     <changeSet id="7" author="Aliaksandr.by">
         <sql>
-            INSERT INTO t_user(id, username,password)
-            VALUES (1, 'admin','$2a$10$oLjEcISCg9p7FPicTn4bKOzC6EYYxSmXiid2UxdJILuQdlZYAx1Ba');
+            INSERT INTO t_user(id, username,email,password)
+            VALUES (1, 'admin','admin@admin.by','$2a$10$oLjEcISCg9p7FPicTn4bKOzC6EYYxSmXiid2UxdJILuQdlZYAx1Ba');
 
             INSERT INTO t_user_roles
             VALUES (1,2);

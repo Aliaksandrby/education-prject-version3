@@ -25,6 +25,9 @@ public class User implements UserDetails {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "email")
+    private String email;
+
     @Size(min = 4,message = "size the element must be higher or equal to 4") // TODO: don't work
     @Column(name = "password")
     private String password;
