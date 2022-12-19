@@ -35,6 +35,9 @@ public class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
+    @Transient
+    private String message;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "t_user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

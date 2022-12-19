@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //@Controller
-public class LoginErrorController {
+public class LoginErrorController { //TODO:
     /*@GetMapping("/login-error.html")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);

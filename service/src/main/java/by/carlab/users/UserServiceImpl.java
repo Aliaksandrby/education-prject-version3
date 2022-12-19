@@ -24,22 +24,29 @@ public class UserServiceImpl implements UserService {
     private RoleDao roleDao;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
     @Override
-    public void createUser(User user) {
+    public void createUser(User user) { //TODO: message to page
         User userNew = new User();
-        if(isPasswordEqualsToConfirmPassword(user) && hasUsernameIntoDB(user)) {
-            userNew.setUsername(user.getUsername());
-            userNew.setEmail(user.getEmail());
-            userNew.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userNew.setRoleSet(Set.of(roleDao.findById(1)));
-            userDao.create(userNew);
-        } else {
-            System.out.println("password is bad"); //TODO: message to page
-            System.out.println("login is bad"); //TODO: message to page
+        if(!hasUsernameIntoDB(user)) {
+            userNew.setMessage("login exists");
+            return;
         }
+        if(!hasEmailIntoDB(user)) {
+            userNew.setMessage("email exists");
+            return;
+        }
+        if(!isPasswordEqualsToConfirmPassword(user)) {
+            userNew.setMessage("wrong confirm password");
+            return;
+        }
+        userNew.setUsername(user.getUsername());
+        userNew.setEmail(user.getEmail());
+        userNew.setPassword(passwordEncoder.encode(user.getPassword()));
+        userNew.setRoleSet(Set.of(roleDao.findById(1)));
+        userDao.create(userNew);
     }
 
     @Override
@@ -50,6 +57,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean hasUsernameIntoDB(User user) {
         User userFound = userDao.findByUsername(user.getUsername());
+        return userFound == null;
+    }
+
+    @Override
+    public boolean hasEmailIntoDB(User user) {
+        User userFound = userDao.findByEmail(user.getEmail());
         return userFound == null;
     }
 
@@ -69,11 +82,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editUser(User user, int id, int roleId) { // TODO: email and checking everything
+    public User editUser(User user, int id, int roleId) { //TODO: message to page
         User editUser = findById(id);
+        if(!editUser.getUsername().equals(user.getUsername())) {
+            System.out.println(editUser.getUsername().equals(user.getUsername()));
+            if(!hasUsernameIntoDB(user)) {
+                editUser.setMessage("username exists");
+                return editUser;
+            }
+        }
+        if(!editUser.getEmail().equals(user.getEmail())) {
+            if(!hasEmailIntoDB(user)) {
+                editUser.setMessage("email exists");
+                return editUser;
+            }
+        }
+        if(!isPasswordEqualsToConfirmPassword(user)) {
+            editUser.setMessage("wrong confirm password");
+            return editUser;
+        }
         editUser.setUsername(user.getUsername());
         editUser.setEmail(user.getEmail());
-        editUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        editUser.setPassword(passwordEncoder.encode(user.getPassword()));
         editUser.setRoleSet(Set.of(roleDao.findById(roleId)));
         userDao.update(editUser);
         return editUser;

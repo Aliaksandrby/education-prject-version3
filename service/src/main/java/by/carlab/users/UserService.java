@@ -9,6 +9,7 @@ public interface UserService extends UserDetailsService {
     void createUser(User user);
     boolean isPasswordEqualsToConfirmPassword(User user);
     boolean hasUsernameIntoDB(User user);
+    boolean hasEmailIntoDB(User user);
     List<User> readAll();
     User findById(int id);
     void deleteUser(int id);

@@ -31,12 +31,6 @@ public class UserDaoImpl implements UserDao {
         sessionFactory.getCurrentSession().update(user);
     }
 
-    /*@Override
-    public void delete(User user) {
-        User loadedUser = sessionFactory.getCurrentSession().load(User.class, user.getId());
-        sessionFactory.getCurrentSession().delete(loadedUser);
-    }*/
-
     @Override
     public void delete(int id) {
         User loadedUser = sessionFactory.getCurrentSession().load(User.class, id);
@@ -60,4 +54,15 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    @Override
+    public User findByEmail(String email) {
+        User user = null;
+        for (User usr : readAll()) {
+            if(usr.getEmail().equals(email)) {
+                user = usr;
+                break;
+            }
+        }
+        return user;
+    }
 }

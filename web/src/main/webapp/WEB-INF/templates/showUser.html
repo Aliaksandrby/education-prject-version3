@@ -36,17 +36,17 @@
 <br>
 <div align="center">
     <form th:action="@{/admin/edit/user/{id}.html(id=${user.id})}" method="post">
-        <label for="username">username: </label><br>
+        <label for="username">username: </label><span th:text="${user.message}"></span><br>
         <input type="text" id="username" name="username" th:value="${user.username}"><br>
 
         <label for="email">email: </label><br>
         <input type="email" id="email" name="email" th:value="${user.email}"><br>
 
         <label for="password">password: </label><br>
-        <input type="password" id="password" name="password" value="password"><br>
+        <input type="password" id="password" name="password" placeholder="password" required><br>
 
         <label for="confirmPassword">Confirm password: </label><br>
-        <input type="password" id="confirmPassword" name="confirmPassword" value="password"><br>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="password" required><br>
 
         <label for="roleId">Role: </label><br>
         <select name="roleId" id="roleId">
