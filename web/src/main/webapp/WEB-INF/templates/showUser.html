@@ -36,7 +36,7 @@
 <br>
 <div align="center">
     <form th:action="@{/admin/edit/user/{id}.html(id=${user.id})}" method="post">
-        <label for="username">username: </label><span th:text="${user.message}"></span><br>
+        <label for="username">username: </label><br>
         <input type="text" id="username" name="username" th:value="${user.username}"><br>
 
         <label for="email">email: </label><br>
@@ -58,6 +58,7 @@
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <input type="submit">
     </form>
+    <span style="color:red" th:text="${user.message}"></span>
 </div>
 </body>
 </html>

@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 
@@ -21,14 +20,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(min = 4,message = "size the element must be higher or equal to 4") // TODO: don't work
     @Column(name = "username")
     private String username;
 
     @Column(name = "email")
     private String email;
 
-    @Size(min = 4,message = "size the element must be higher or equal to 4") // TODO: don't work
     @Column(name = "password")
     private String password;
 

@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    void createUser(User user);
+    User createUser(User user);
     boolean isPasswordEqualsToConfirmPassword(User user);
     boolean hasUsernameIntoDB(User user);
     boolean hasEmailIntoDB(User user);
