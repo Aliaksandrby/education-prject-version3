@@ -9,14 +9,19 @@
 
 <div class="container" th:fragment="logout" sec:authorize="isAuthenticated()">
     <form class="form-signin" method="post" th:action="@{/logout}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">logout: <span sec:authentication="name"></span></button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            logout: <span sec:authentication="name"></span>
+        </button>
     </form>
 </div>
 
 <div class="container" th:fragment="login" sec:authorize="isAuthenticated()==false">
-    <form class="form-signin" method="post" th:action="@{/login.html}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">login</button>
-    </form>
+    <a th:href="@{/login.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            login
+        </button>
+    </a>
+    <br>
 </div>
 
 <div class="container" th:fragment="registration" sec:authorize="isAuthenticated()==false">
