@@ -31,7 +31,7 @@ public class Car {
     private String transmission;
 
     @Column(name = "price")
-    private int price;
+    private double price;
 
 
     @OneToMany(fetch = FetchType.EAGER,

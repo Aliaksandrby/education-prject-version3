@@ -13,7 +13,7 @@
                 year INT,
                 engine_description VARCHAR(200),
                 transmission VARCHAR(100),
-                price INT
+                price FLOAT
             );
         </sql>
     </changeSet>
