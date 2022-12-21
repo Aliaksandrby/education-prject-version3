@@ -39,6 +39,9 @@ public class Car {
             cascade = CascadeType.REMOVE)
     private List<ImageCar> imageCarList;
 
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "car")
+    //private List<OrderCars> orderCarsList;
+
     @Override
     public String toString() {
         return "Car{" +

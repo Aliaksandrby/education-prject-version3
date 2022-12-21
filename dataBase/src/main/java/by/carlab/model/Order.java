@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,4 +16,11 @@ public class Order {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "order")
+    private List<OrderCars> orderCarsList;
+
+    @ManyToOne (fetch=FetchType.EAGER)
+    @JoinColumn (name="user_id")
+    private User user;
 }

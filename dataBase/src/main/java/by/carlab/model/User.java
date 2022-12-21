@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -34,6 +35,9 @@ public class User implements UserDetails {
 
     @Transient
     private String message;
+
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    //private List<Order> orderList;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "t_user_roles",
