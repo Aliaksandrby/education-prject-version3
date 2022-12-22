@@ -69,6 +69,18 @@
             VALUES (1,2);
         </sql>
     </changeSet>
+    <changeSet id="8" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_order (
+                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                user_id INT,
+                car_id INT,
+                date_now DATE,
+                FOREIGN KEY (user_id) REFERENCES t_user (id),
+                FOREIGN KEY (car_id)  REFERENCES t_car (id)
+            );
+        </sql>
+    </changeSet>
     <!--<changeSet id="8" author="Aliaksandr.by">
         <sql>
             INSERT INTO t_car (name,year,engine_description,transmission,price)

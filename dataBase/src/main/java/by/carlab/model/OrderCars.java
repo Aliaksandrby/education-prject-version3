@@ -3,12 +3,12 @@ package by.carlab.model;
 import lombok.*;
 import javax.persistence.*;
 
-@Getter
+/*@Getter
 @Setter
 @Entity
-@Table(name = "t_order_cars")
+@Table(name = "t_order_cars")*/
 public class OrderCars {
-    @Id
+    /*@Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -19,5 +19,5 @@ public class OrderCars {
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn (name="order_id")
-    private Order order;
+    private Order order;*/
 }
