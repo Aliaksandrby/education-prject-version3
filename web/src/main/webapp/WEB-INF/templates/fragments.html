@@ -66,15 +66,15 @@
     </a>
 </div>
 
-<div class="container" th:fragment="order" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
-    <a th:href="@{/order/car/{id}.html(id=${car.id})}">
+<div class="container" th:fragment="createOrder" sec:authorize="isAuthenticated()">
+    <a th:href="@{/order/create/car/{id}.html(id=${car.id})}">
         <button class="btn btn-lg btn-primary btn-block form-signin">
             order
         </button>
     </a>
 </div>
 
-<div class="container" th:fragment="delete" sec:authorize="hasRole('ROLE_ADMIN')">
+<div class="container" th:fragment="deleteCar" sec:authorize="hasRole('ROLE_ADMIN')">
     <a th:href="@{/admin/delete/car/{id}.html(id=${car.id})}">
         <button class="btn btn-lg btn-primary btn-block form-signin">
             delete
@@ -97,6 +97,12 @@
         </button>
     </a>
 </div>
-
+<div class="container" th:fragment="editUserData" sec:authorize="hasRole('ROLE_USER')">
+    <a th:href="@{/user/editUserData.html}">
+        <button class="btn btn-lg btn-primary btn-block form-signin">
+            edit user data
+        </button>
+    </a>
+</div>
 </body>
 </html>

@@ -12,8 +12,8 @@
 <body>
 <h1 align="center" th:text="${car.name}"></h1>
 <div th:replace="fragments::logout"></div>
-<div th:replace="fragments::order"></div>
-<div th:replace="fragments::delete"></div>
+<div th:replace="fragments::createOrder"></div> <!--     -->
+<div th:replace="fragments::deleteCar"></div>
 <div th:replace="fragments::returnToCarList"></div>
 <div align="center" id="main">
     <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
@@ -29,12 +29,14 @@
         <th>Engine description</th>
         <th>Type transmission</th>
         <th>Price per day</th>
+        <th>Is ordered</th>
     </tr>
     <tr>
         <td th:text="${car.year}"></td>
         <td th:text="${car.engineDescription}"></td>
         <td th:text="${car.transmission}"></td>
         <td th:text="${car.price}"></td>
+        <td th:text="${car.isOrdered == 1} ? 'unavailable':'available'"></td>
     </tr>
 </table>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -54,13 +56,13 @@
             <input type="text" id="transmission" name="transmission" th:value="${car.transmission}"><br>
 
             <label for="price">Price: </label><br>
-            <input type="number" id="price" name="price" th:value="${car.price}"><br>
+            <input type="number" id="price" name="price" th:value="${car.price}" min="1" step="0.01"><br>
 
             <label for="images">images: </label><br>
             <input type="file" id="images" multiple name="images"><br><br>
 
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-            <input type="submit">
+            <input type="submit" value="send">
         </form>
     </div>
 </div>

@@ -38,6 +38,9 @@ public class User implements UserDetails {
     @OneToOne(mappedBy = "user")
     private Order order;
 
+    @OneToOne(mappedBy = "user")
+    private UserCard userCard;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "t_user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

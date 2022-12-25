@@ -13,7 +13,8 @@
                 year INT,
                 engine_description VARCHAR(200),
                 transmission VARCHAR(100),
-                price FLOAT
+                price FLOAT,
+                is_ordered INT
             );
         </sql>
     </changeSet>
@@ -78,6 +79,20 @@
                 date_now DATE,
                 FOREIGN KEY (user_id) REFERENCES t_user (id),
                 FOREIGN KEY (car_id)  REFERENCES t_car (id)
+            );
+        </sql>
+    </changeSet>
+    <changeSet id="9" author="Aliaksandr.by">
+        <sql>
+            CREATE TABLE IF NOT EXISTS t_user_card (
+                id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                card_number VARCHAR(19),
+                month INT,
+                year INT,
+                code INT,
+                name_card VARCHAR(20),
+                user_id INT,
+                FOREIGN KEY (user_id) REFERENCES t_user (id)
             );
         </sql>
     </changeSet>

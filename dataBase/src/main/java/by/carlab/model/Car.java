@@ -33,6 +33,8 @@ public class Car {
     @Column(name = "price")
     private double price;
 
+    @Column(name = "is_ordered")
+    private int isOrdered;
 
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "car",
@@ -41,17 +43,4 @@ public class Car {
 
     @OneToOne(mappedBy = "car")
     private Order order;
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", year=" + year +
-                ", engineDescription='" + engineDescription + '\'' +
-                ", transmission='" + transmission + '\'' +
-                ", price=" + price +
-                ", imageList=" + imageCarList +
-                '}';
-    }
 }

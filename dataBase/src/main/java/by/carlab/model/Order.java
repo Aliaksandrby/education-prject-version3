@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,11 +18,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne  //(fetch=FetchType.EAGER)
+    @OneToOne
     @JoinColumn (name="user_id")
     private User user;
 
-    @OneToOne  //(fetch=FetchType.EAGER)
+    @OneToOne
     @JoinColumn (name="car_id")
     private Car car;
 

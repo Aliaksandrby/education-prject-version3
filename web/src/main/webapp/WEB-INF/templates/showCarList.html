@@ -13,6 +13,7 @@
 <div th:replace="fragments::login"></div>
 <div th:replace="fragments::registration"></div>
 <div th:replace="fragments::administration"></div>
+<div th:replace="fragments::editUserData"></div>
 <p></p>
 <div align="center" th:each="car : ${carList}">
     <div id="avrDiv" class="warning">
@@ -26,7 +27,8 @@
                 year: <span th:text="${car.year}"></span><br>
                 engine description: <span th:text="${car.engineDescription}"></span><br>
                 transmission: <span th:text="${car.transmission}"></span><br>
-                price: <span th:text="${car.price}"></span><br><br>
+                price: <span th:text="${car.price}"></span><br>
+                <span th:text="${car.isOrdered == 1} ? 'unavailable':'available'"></span><br>
             </div>
         </a>
     </div><br>

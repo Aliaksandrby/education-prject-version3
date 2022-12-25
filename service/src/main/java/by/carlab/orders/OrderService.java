@@ -1,5 +1,8 @@
 package by.carlab.orders;
 
+import by.carlab.model.Car;
+
 public interface OrderService {
-    void createOrder();
+    Car createOrder(String username,int carId);
+    Car cancelOrder(String username,int carId);
 }

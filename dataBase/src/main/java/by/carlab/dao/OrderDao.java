@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderDao {
     void create(Order order);
-    List<User> readAll();
+    List<Order> readAll();
     void update(Order order);
-    void delete(int id);
+    void delete(Order order);
 }
