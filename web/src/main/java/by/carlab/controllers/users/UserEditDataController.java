@@ -28,7 +28,7 @@ public class UserEditDataController {
 
     @PostMapping("/user/editUserData.html")
     public String editUser(User user,Model model) {
-        model.addAttribute("user",userService.editUser(user,userId));
+        model.addAttribute("user",userService.editUser(user,userId,1));
         return "editUserData";
     }
 }

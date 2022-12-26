@@ -41,6 +41,6 @@ public class Car {
             cascade = CascadeType.REMOVE)
     private List<ImageCar> imageCarList;
 
-    @OneToOne(mappedBy = "car")
-    private Order order;
+    //@OneToOne(mappedBy = "car",cascade = CascadeType.REFRESH)
+    //private Order order;
 }

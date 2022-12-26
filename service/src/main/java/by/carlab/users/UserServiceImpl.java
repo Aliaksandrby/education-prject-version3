@@ -113,32 +113,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User editUser(User user,int id) { //TODO DRY
-        User editUser = userDao.findById(id);
-        if(!editUser.getUsername().equals(user.getUsername())) {
-            if(!hasUsernameIntoDB(user)) {
-                editUser.setMessage("username exists");
-                return editUser;
-            }
-        }
-        if(!editUser.getEmail().equals(user.getEmail())) {
-            if(!hasEmailIntoDB(user)) {
-                editUser.setMessage("email exists");
-                return editUser;
-            }
-        }
-        if(!isPasswordEqualsToConfirmPassword(user)) {
-            editUser.setMessage("wrong confirm password");
-            return editUser;
-        }
-        editUser.setUsername(user.getUsername());
-        editUser.setEmail(user.getEmail());
-        editUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDao.update(editUser);
-        return editUser;
-    }
-
-    @Override
     public UserDetails loadUserByUsername(String username) {
         return userDao.findByUsername(username);
     }

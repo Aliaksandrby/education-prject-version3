@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Getter
@@ -19,13 +20,16 @@ public class Order {
     private Integer id;
 
     @OneToOne
-    @JoinColumn (name="user_id")
+    //@JoinColumn (name="user_id")
     private User user;
 
     @OneToOne
-    @JoinColumn (name="car_id")
+    //@JoinColumn (name="car_id")
     private Car car;
 
-    @Column(name = "date_now")
-    private Date dateNow;
+    @Column(name = "date_order")
+    private Timestamp dateOrder;
+
+    @Column(name = "date_complete_order")
+    private Timestamp dateCompleteOrder;
 }

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,26 +33,17 @@ public class OrderServiceImpl implements OrderService {
     public Car createOrder(String username,int carId) {
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        if(car.getIsOrdered() == 0) {
-            Order order = new Order();
-            order.setCar(car);
-            order.setUser(user);
-            order.setDateNow(Date.valueOf(LocalDate.now()));
-            orderDao.create(order);
-            car.setIsOrdered(1);
-            carDao.update(car);
-        }
+        Order order = new Order();
+        order.setCar(car);
+        order.setUser(user);
+        order.setDateOrder(Timestamp.valueOf(LocalDateTime.now()));
+        orderDao.create(order);
         return car;
     }
 
     @Override
-    public Car cancelOrder(String username, int carId) {
+    public Car completeOrder(String username, int carId) {
         Car car = carDao.findById(carId);
-        User user = userDao.findByUsername(username);
-        if(car.getIsOrdered() == 1) {
-            car.setIsOrdered(0);
-            carDao.update(car);
-        }
         return car;
     }
 }
