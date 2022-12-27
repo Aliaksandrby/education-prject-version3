@@ -29,6 +29,9 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "is_ordered")
+    private int isOrdered;
+
     @Transient
     private String confirmPassword;
 

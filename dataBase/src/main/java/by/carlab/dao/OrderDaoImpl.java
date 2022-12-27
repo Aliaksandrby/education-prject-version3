@@ -1,8 +1,6 @@
 package by.carlab.dao;
 
-import by.carlab.model.Car;
 import by.carlab.model.Order;
-import by.carlab.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -24,7 +22,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> readAll() {
-        return null;
+        String query = "from Order";
+        return sessionFactory.getCurrentSession().createQuery(query, Order.class).list();
     }
 
     @Override
@@ -36,5 +35,10 @@ public class OrderDaoImpl implements OrderDao {
     public void delete(Order order) {
         Order loadedOrder = sessionFactory.getCurrentSession().load(Order.class, order.getId());
         sessionFactory.getCurrentSession().delete(loadedOrder);
+    }
+
+    @Override
+    public Order findById(int id) {
+        return sessionFactory.getCurrentSession().get(Order.class, id);
     }
 }

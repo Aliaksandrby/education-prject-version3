@@ -34,7 +34,8 @@
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 username VARCHAR(255),
                 email VARCHAR(100),
-                password VARCHAR(255)
+                password VARCHAR(255),
+                is_ordered INT DEFAULT 0
             );
         </sql>
     </changeSet>
@@ -77,9 +78,9 @@
                 user_id INT,
                 car_id INT,
                 date_order DATETIME,
-                date_complete_order DATETIME,
-                FOREIGN KEY (user_id) REFERENCES t_user (id),
-                FOREIGN KEY (car_id)  REFERENCES t_car (id)
+                date_complete_order DATETIME
+                <!--FOREIGN KEY (user_id) REFERENCES t_user (id),
+                FOREIGN KEY (car_id)  REFERENCES t_car (id)-->
             );
         </sql>
     </changeSet>

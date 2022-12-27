@@ -7,17 +7,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.security.Principal;
-
 @Controller
-public class CreateOrderController {
+public class OrderShowController {
 
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/order/create/car/{id}.html")
-    public String createOrder(Model model, @PathVariable("id") int id, Principal principal) {
-        model.addAttribute("car",orderService.createOrder(principal.getName(),id));
-        return "showCar";
+    @GetMapping("/admin/order/{id}.html")
+    public String showOrder(Model model, @PathVariable("id") int id) {
+        model.addAttribute("order",orderService.getOrder(id));
+        return "showOrder";
     }
 }

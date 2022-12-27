@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order panel</title>
+    <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h3 align="center"><strong>Order panel</strong></h3>
+<div th:replace="fragments::logout"></div>
+<div th:replace="fragments::returnToCarList"></div>
+<h3 align="center"><strong>Description orders</strong></h3>
+<table class="rounded" align="center">
+    <tr>
+        <th>Id</th>
+        <th>Username</th>
+        <th>Car</th>
+        <th>Date order</th>
+        <th>Date complete order</th>
+        <th>Show</th>
+    </tr>
+    <tr th:each="order : ${orderList}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.user.username}"></td>
+        <td th:text="${order.car.name}"></td>
+        <td th:text="${order.dateOrder}"></td>
+        <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
+        <td>
+            <a th:href="@{/admin/order/{id}.html(id=${order.id})}">
+                <button>show</button>
+            </a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -12,7 +12,8 @@
 <body>
 <h1 align="center" th:text="${car.name}"></h1>
 <div th:replace="fragments::logout"></div>
-<div th:replace="fragments::createOrder"></div> <!--     -->
+<div th:replace="fragments::createOrder"></div>
+<div th:replace="fragments::completeOrder"></div>
 <div th:replace="fragments::deleteCar"></div>
 <div th:replace="fragments::returnToCarList"></div>
 <div align="center" id="main">

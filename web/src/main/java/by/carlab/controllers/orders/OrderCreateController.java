@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.security.Principal;
 
 @Controller
-public class CancelOrderController {
+public class OrderCreateController {
+
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/order/cancel/car/{id}.html")
-    public String cancelOrder(Model model, @PathVariable("id") int id, Principal principal) {
+    @GetMapping("/order/create/car/{id}.html")
+    public String createOrder(Model model, @PathVariable("id") int id, Principal principal) {
         model.addAttribute("car",orderService.createOrder(principal.getName(),id));
         return "showCar";
     }

@@ -24,7 +24,7 @@ public class Order {
     private User user;
 
     @OneToOne
-    //@JoinColumn (name="car_id")
+    @JoinColumn (name="car_id")
     private Car car;
 
     @Column(name = "date_order")
