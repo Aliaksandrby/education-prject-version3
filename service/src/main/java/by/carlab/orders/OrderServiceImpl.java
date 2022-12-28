@@ -32,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     public Car createOrder(String username,int carId) {
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        if(car.getIsOrdered() == 0 && user.getIsOrdered() == 0) {
+        if((car.getIsOrdered() == 0) && (user.getIsOrdered() == 0)) {
             Order order = new Order();
             order.setCar(car);
             order.setUser(user);
@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
         Order order = orderDao.findByCarAndUser(user,car);
-        if(car.getIsOrdered() == 1 && user.getIsOrdered() == 1 && order != null) {
+        if((car.getIsOrdered() == 1) && (user.getIsOrdered() == 1) && (order != null)) {
             car.setIsOrdered(0);
             user.setIsOrdered(0);
             order.setDateCompleteOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
