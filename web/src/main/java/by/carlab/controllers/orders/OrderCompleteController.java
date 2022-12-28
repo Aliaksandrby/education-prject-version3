@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.security.Principal;
 
 @Controller
-public class OrderCompleteController { // TODO
+public class OrderCompleteController {
     @Autowired
     private OrderService orderService;
 

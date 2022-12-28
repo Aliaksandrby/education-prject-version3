@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -30,16 +29,16 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     @Override
-    public Car createOrder(String username,int carId) { // TODO
+    public Car createOrder(String username,int carId) {
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        if(car.getIsOrdered()==0 && user.getIsOrdered()==0) {
+        if(car.getIsOrdered() == 0 && user.getIsOrdered() == 0) {
             Order order = new Order();
-            car.setIsOrdered(1);
-            user.setIsOrdered(1);
             order.setCar(car);
             order.setUser(user);
-            order.setDateOrder(Timestamp.valueOf(LocalDateTime.now()));
+            order.setDateOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
+            car.setIsOrdered(1);
+            user.setIsOrdered(1);
             carDao.update(car);
             userDao.update(user);
             orderDao.create(order);
@@ -48,14 +47,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Car completeOrder(String username, int carId) { // TODO
+    public Car completeOrder(String username, int carId) {
         Car car = carDao.findById(carId);
-        Order order = car.getOrder();
         User user = userDao.findByUsername(username);
-        if(car.getIsOrdered()==1 && user.getIsOrdered()==1) {
+        Order order = orderDao.findByCarAndUser(user,car);
+        if(car.getIsOrdered() == 1 && user.getIsOrdered() == 1 && order != null) {
             car.setIsOrdered(0);
             user.setIsOrdered(0);
-            order.setDateCompleteOrder(Timestamp.valueOf(LocalDateTime.now()));
+            order.setDateCompleteOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
             carDao.update(car);
             userDao.update(user);
             orderDao.update(order);

@@ -1,6 +1,8 @@
 package by.carlab.dao;
 
+import by.carlab.model.Car;
 import by.carlab.model.Order;
+import by.carlab.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -40,5 +42,19 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order findById(int id) {
         return sessionFactory.getCurrentSession().get(Order.class, id);
+    }
+
+    @Override
+    public Order findByCarAndUser(User user, Car car) {
+        List<Order> orderList = readAll();
+        Order newOrder = null;
+        for (Order order : orderList) {
+            if(order.getUser().getUsername().equals(user.getUsername()) && user.getIsOrdered() == 1 &&
+            order.getCar().getIsOrdered()==1 && order.getCar().getName().equals(car.getName())) {
+                newOrder = order;
+                break;
+            }
+        }
+        return newOrder;
     }
 }

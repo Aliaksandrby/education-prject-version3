@@ -14,7 +14,7 @@
                 engine_description VARCHAR(200),
                 transmission VARCHAR(100),
                 price FLOAT,
-                is_ordered INT
+                is_ordered INT DEFAULT 0
             );
         </sql>
     </changeSet>
@@ -77,6 +77,7 @@
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 user_id INT,
                 car_id INT,
+                <!--is_ordered INT DEFAULT 0,-->
                 date_order DATETIME,
                 date_complete_order DATETIME
                 <!--FOREIGN KEY (user_id) REFERENCES t_user (id),
