@@ -1,7 +1,6 @@
 package by.carlab.dao;
 
 import by.carlab.model.Role;
-import by.carlab.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

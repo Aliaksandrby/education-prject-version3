@@ -20,15 +20,10 @@ public class Order {
     private Integer id;
 
     @OneToOne
-    //@JoinColumn (name="user_id")
     private User user;
 
     @OneToOne
-    //@JoinColumn (name="car_id")
     private Car car;
-
-    //@Column(name = "is_ordered")
-    //private int isOrdered;
 
     @Column(name = "date_order")
     private Timestamp dateOrder;

@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
             userNew.setMessage("email exists");
             return userNew;
         }
-        if(!isPasswordEqualsToConfirmPassword(user)) {
+        if(isPasswordEqualsToConfirmPassword(user)) {
             userNew.setMessage("wrong confirm password");
             return userNew;
         }
@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
                 return editUser;
             }
         }
-        if(!isPasswordEqualsToConfirmPassword(user)) {
+        if(isPasswordEqualsToConfirmPassword(user)) {
             editUser.setMessage("wrong confirm password");
             return editUser;
         }

@@ -1,7 +1,6 @@
 package by.carlab.controllers.cars;
 
 import by.carlab.cars.PagingService;
-import by.carlab.cars.PagingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

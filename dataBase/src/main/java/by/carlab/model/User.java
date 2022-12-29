@@ -38,9 +38,6 @@ public class User implements UserDetails {
     @Transient
     private String message;
 
-    //@OneToOne(mappedBy = "user")
-    //private Order order;
-
     @OneToOne(mappedBy = "user")
     private UserCard userCard;
 

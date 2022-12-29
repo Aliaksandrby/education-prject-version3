@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order panel</title>
+    <title>OrderList panel</title>
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h3 align="center"><strong>Order panel</strong></h3>
+<h3 align="center"><strong>OrderList panel</strong></h3>
 <div th:replace="fragments::logout"></div>
 <div th:replace="fragments::returnToCarList"></div>
 <h3 align="center"><strong>Description orders</strong></h3>
@@ -23,8 +23,8 @@
     </tr>
     <tr th:each="order : ${orderList}">
         <td th:text="${order.id}"></td>
-        <td th:text="${order.user.username}"></td>
-        <td th:text="${order.car.name}"></td>
+        <td th:text="${order.user == null} ? 'user does not exist':${order.user.username}"></td> <!--FIXME-->
+        <td th:text="${order.car == null} ? 'car does not exist':${order.car.name}"></td> <!--FIXME-->
         <td th:text="${order.dateOrder}"></td>
         <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
         <td>

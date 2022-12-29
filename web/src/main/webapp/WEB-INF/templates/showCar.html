@@ -41,7 +41,7 @@
     </tr>
 </table>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
-    <h3 align="center">Edit this car</h3>
+    <h3 align="center">Edit car panel</h3>
     <div align="center">
         <form th:action="@{/admin/edit/car/{id}.html(id=${car.id})}" method="post" enctype="multipart/form-data">
             <label for="name">Name car: </label><br>

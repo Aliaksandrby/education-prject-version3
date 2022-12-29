@@ -77,11 +77,8 @@
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 user_id INT,
                 car_id INT,
-                <!--is_ordered INT DEFAULT 0,-->
                 date_order DATETIME,
                 date_complete_order DATETIME
-                <!--FOREIGN KEY (user_id) REFERENCES t_user (id),
-                FOREIGN KEY (car_id)  REFERENCES t_car (id)-->
             );
         </sql>
     </changeSet>
@@ -99,7 +96,7 @@
             );
         </sql>
     </changeSet>
-    <!--<changeSet id="8" author="Aliaksandr.by">
+    <!--<changeSet id="10" author="Aliaksandr.by">
         <sql>
             INSERT INTO t_car (name,year,engine_description,transmission,price)
             VALUES
