@@ -28,11 +28,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         User userNew = new User();
-        if(!hasUsernameIntoDB(user)) {
-            userNew.setMessage("login exists");
+        if(hasUsernameIntoDB(user)) {
+            userNew.setMessage("username exists");
             return userNew;
         }
-        if(!hasEmailIntoDB(user)) {
+        if(hasEmailIntoDB(user)) {
             userNew.setMessage("email exists");
             return userNew;
         }
@@ -50,19 +50,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isPasswordEqualsToConfirmPassword(User user) {
-        return user.getPassword().equals(user.getConfirmPassword());
+        return !user.getPassword().equals(user.getConfirmPassword());
     }
 
     @Override
     public boolean hasUsernameIntoDB(User user) {
-        User userFound = userDao.findByUsername(user.getUsername());
-        return userFound == null;
+        return !(userDao.findByUsername(user.getUsername()) == null);
     }
 
     @Override
     public boolean hasEmailIntoDB(User user) {
-        User userFound = userDao.findByEmail(user.getEmail());
-        return userFound == null;
+        return !(userDao.findByEmail(user.getEmail()) == null);
     }
 
     @Override
@@ -89,13 +87,13 @@ public class UserServiceImpl implements UserService {
     public User editUser(User user, int id, int roleId) {
         User editUser = userDao.findById(id);
         if(!editUser.getUsername().equals(user.getUsername())) {
-            if(!hasUsernameIntoDB(user)) {
+            if(hasUsernameIntoDB(user)) {
                 editUser.setMessage("username exists");
                 return editUser;
             }
         }
         if(!editUser.getEmail().equals(user.getEmail())) {
-            if(!hasEmailIntoDB(user)) {
+            if(hasEmailIntoDB(user)) {
                 editUser.setMessage("email exists");
                 return editUser;
             }

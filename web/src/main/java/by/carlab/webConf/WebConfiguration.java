@@ -20,12 +20,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 @Configuration
 @ComponentScan(basePackages = "by.carlab")
 @EnableWebMvc
-public class WebConfiguration implements WebMvcConfigurer {//WebMvcConfigurerAdapter {
-
-    /*@Bean
-    public InternalResourceViewResolver internalResourceViewResolver() {
-        return new InternalResourceViewResolver("/WEB-INF/templates/", ".jsp");
-    }*/
+public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
@@ -62,7 +57,7 @@ public class WebConfiguration implements WebMvcConfigurer {//WebMvcConfigurerAda
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
-        commonsMultipartResolver.setMaxUploadSize(10000000); //general size all files uploading for one time
+        commonsMultipartResolver.setMaxUploadSize(10000000);
         commonsMultipartResolver.setDefaultEncoding("UTF-8");
         return commonsMultipartResolver;
     }

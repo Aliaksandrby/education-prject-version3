@@ -1,4 +1,4 @@
-package by.carlab.servlet;
+package by.carlab.webConf;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
