@@ -8,9 +8,9 @@
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<p th:replace="~{fragments::logout}"></p>
 <h3 align="center"><strong>OrderList panel</strong></h3>
-<div th:replace="fragments::logout"></div>
-<div th:replace="fragments::returnToCarList"></div>
+<p th:replace="~{fragments::returnToCarList}"></p>
 <h3 align="center"><strong>Description orders</strong></h3>
 <table class="rounded" align="center">
     <tr>
@@ -23,8 +23,8 @@
     </tr>
     <tr th:each="order : ${orderList}">
         <td th:text="${order.id}"></td>
-        <td th:text="${order.user == null} ? 'user does not exist':${order.user.username}"></td> <!--FIXME-->
-        <td th:text="${order.car == null} ? 'car does not exist':${order.car.name}"></td> <!--FIXME-->
+        <td th:text="${order.user==null} ? 'user does not exist':${order.user.username}"></td> <!-- FIXME -->
+        <td th:text="${order.car==null} ? 'car does not exist':${order.car.name}"></td>
         <td th:text="${order.dateOrder}"></td>
         <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
         <td>

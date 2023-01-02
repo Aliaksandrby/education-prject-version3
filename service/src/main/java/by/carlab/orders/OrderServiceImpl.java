@@ -29,35 +29,35 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     @Override
-    public Car createOrder(String username,int carId) {
+    public Car createOrder(String username,int carId) { //todo
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        if((car.getIsOrdered() == 0) && (user.getIsOrdered() == 0)) {
+        if((car.getIsOrder() == 0) && (user.getIsOrder() == 0)) {
+            car.setIsOrder(1);
+            //carDao.update(car);
+            user.setIsOrder(1);
+            //userDao.update(user);
             Order order = new Order();
-            order.setCar(car);
             order.setUser(user);
+            order.setCar(car);
             order.setDateOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
-            car.setIsOrdered(1);
-            user.setIsOrdered(1);
-            carDao.update(car);
-            userDao.update(user);
             orderDao.create(order);
         }
         return car;
     }
 
     @Override
-    public Car completeOrder(String username, int carId) {
+    public Car completeOrder(String username, int carId) { //todo
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
         Order order = orderDao.findByCarAndUser(user,car);
-        if((car.getIsOrdered() == 1) && (user.getIsOrdered() == 1) && (order != null)) {
-            car.setIsOrdered(0);
-            user.setIsOrdered(0);
+        if((car.getIsOrder() == 1) && (user.getIsOrder() == 1) && (order != null)) {
+            car.setIsOrder(0);
+            //carDao.update(car);
+            user.setIsOrder(0);
+            //userDao.update(user);
             order.setDateCompleteOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
-            carDao.update(car);
-            userDao.update(user);
-            orderDao.update(order);
+            //orderDao.update(order);
         }
         return car;
     }
@@ -77,6 +77,4 @@ public class OrderServiceImpl implements OrderService {
         Order foundOrder = orderDao.findById(id);
         orderDao.delete(foundOrder);
     }
-
-
 }

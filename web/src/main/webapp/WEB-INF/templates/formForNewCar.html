@@ -7,9 +7,9 @@
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<p th:replace="~{fragments::logout}"></p>
 <h1 align="center">Add new car panel</h1>
-<div th:replace="fragments::logout"></div>
-<div th:replace="fragments::returnToCarList"></div>
+<p th:replace="~{fragments::returnToCarList}"></p>
 <div align="center">
     <form th:action="@{/admin/add/car.html}" enctype="multipart/form-data" method="post">
         <label for="name">Name: </label><br>

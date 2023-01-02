@@ -1,6 +1,9 @@
 package by.carlab.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -33,8 +36,11 @@ public class Car {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "is_ordered")
-    private int isOrdered;
+    @OneToMany(mappedBy = "car")
+    private List<Order> order;
+
+    @Column(name = "is_order")
+    private int isOrder;
 
     @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "car",

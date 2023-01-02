@@ -17,10 +17,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
 
     @Column(name = "date_order")

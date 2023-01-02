@@ -8,11 +8,10 @@
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<p th:replace="~{fragments::logout}"></p>
 <h3 align="center"><strong>Order panel</strong></h3>
-<div th:replace="fragments::logout"></div>
-<div th:replace="fragments::deleteOrder"></div>
-<br>
-<div th:replace="fragments::returnToCarList"></div>
+<p th:replace="~{fragments::deleteOrder}"></p>
+<p th:replace="~{fragments::returnToCarList}"></p>
 <h3 align="center"><strong>Order</strong></h3>
 <table class="rounded" align="center">
     <tr>
@@ -24,8 +23,8 @@
     </tr>
     <tr>
         <td th:text="${order.id}"></td>
-        <td th:text="${order.user.username}"></td>
-        <td th:text="${order.car.name}"></td>
+        <td th:text="${order.user == null} ? 'user does not exist':${order.user.username}"></td>
+        <td th:text="${order.car == null} ? 'car does not exist':${order.car.name}"></td>
         <td th:text="${order.dateOrder}"></td>
         <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
     </tr>

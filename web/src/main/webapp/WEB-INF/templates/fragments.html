@@ -7,118 +7,94 @@
 </head>
 <body>
 
-<div class="container" th:fragment="logout" sec:authorize="isAuthenticated()">
-    <form class="form-signin" method="post" th:action="@{/logout}">
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-            logout: <span sec:authentication="name"></span>
-        </button>
-    </form>
-</div>
+<form th:fragment="logout" sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}" class="form-center">
+    <button class="b-class" type="submit">
+        logout: <span sec:authentication="name"></span>
+    </button>
+</form>
 
-<div class="container" th:fragment="login" sec:authorize="isAuthenticated()==false">
+<p th:fragment="login" sec:authorize="isAuthenticated()==false" class="p-class">
     <a th:href="@{/login.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            login
-        </button>
+        <button class="b-class">login</button>
     </a>
-    <br>
-</div>
+</p>
 
-<div class="container" th:fragment="registration" sec:authorize="isAuthenticated()==false">
+<p th:fragment="registration" sec:authorize="isAuthenticated()==false" class="p-class">
     <a th:href="@{/registration.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            registration
-        </button>
+        <button class="b-class">sing up</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="administration" sec:authorize="hasRole('ROLE_ADMIN')">
+<p th:fragment="addCar" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/add/car.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            add car
-        </button>
+        <button class="b-class">add car</button>
     </a>
-    <p></p>
+</p>
+
+<p th:fragment="showUserList" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/showUserList.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            edit/view users
-        </button>
+        <button class="b-class">edit/view users</button>
     </a>
-    <p></p>
+</p>
+
+<p th:fragment="showOrderList" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/showOrderList.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            edit/view orders
-        </button>
+        <button class="b-class">edit/view orders</button>
     </a>
-    <p></p>
+</p>
+
+<p th:fragment="showPaymentList" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/showPaymentsList.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            edit/view payments
-        </button>
+        <button class="b-class">edit/view payments</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="returnToCarList">
-    <a th:href="@{/}"> <!-- onclick="javascript:history.back(-2); return false;" -->
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            return to carList
-        </button>
+<p th:fragment="returnToCarList" class="p-class">
+    <a th:href="@{/}">
+        <button class="b-class">return to carList</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="createOrder" sec:authorize="isAuthenticated()">
+<p th:fragment="createOrder" sec:authorize="isAuthenticated()" class="p-class">
     <a th:href="@{/order/create/car/{id}.html(id=${car.id})}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            order
-        </button>
+        <button class="b-class">create order</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="completeOrder" sec:authorize="isAuthenticated()">
+<p th:fragment="completeOrder" sec:authorize="isAuthenticated()" class="p-class">
     <a th:href="@{/order/complete/car/{id}.html(id=${car.id})}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            complete order
-        </button>
+        <button class="b-class">complete order</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="deleteCar" sec:authorize="hasRole('ROLE_ADMIN')">
+<p th:fragment="deleteCar" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/delete/car/{id}.html(id=${car.id})}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            delete
-        </button>
+        <button class="b-class">delete car</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="deleteUser" sec:authorize="hasRole('ROLE_ADMIN')">
+<p th:fragment="deleteUser" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/delete/user/{id}.html(id=${user.id})}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            delete
-        </button>
+        <button class="b-class">delete user</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="deleteOrder" sec:authorize="hasRole('ROLE_ADMIN')">
+<p th:fragment="deleteOrder" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/delete/order/{id}.html(id=${order.id})}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            delete
-        </button>
+        <button class="b-class">delete order</button>
     </a>
-</div>
+</p>
 
-<div class="container" th:fragment="returnToUserList" sec:authorize="hasRole('ROLE_ADMIN')">
+<p th:fragment="returnToUserList" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
     <a th:href="@{/admin/showUserList.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            return to userList
-        </button>
+        <button class="b-class">return to userList</button>
     </a>
-</div>
-<div class="container" th:fragment="editUserData" sec:authorize="hasRole('ROLE_USER')">
+</p>
+
+<p th:fragment="editUserData" sec:authorize="hasRole('ROLE_USER')" class="p-class">
     <a th:href="@{/user/editUserData.html}">
-        <button class="btn btn-lg btn-primary btn-block form-signin">
-            edit user data
-        </button>
+        <button class="b-class">edit user data</button>
     </a>
-</div>
+</p>
 </body>
 </html>

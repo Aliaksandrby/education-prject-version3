@@ -9,12 +9,14 @@
     <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div th:replace="fragments::logout"></div>
-<div th:replace="fragments::login"></div>
-<div th:replace="fragments::registration"></div>
-<div th:replace="fragments::administration"></div>
-<div th:replace="fragments::editUserData"></div>
-<p></p>
+<p th:replace="~{fragments::logout}"></p>
+<p th:replace="~{fragments::login}"></p>
+<p th:replace="~{fragments::registration}"></p>
+<p th:replace="~{fragments::addCar}"></p>
+<p th:replace="~{fragments::showUserList}"></p>
+<p th:replace="~{fragments::showOrderList}"></p>
+<p th:replace="~{fragments::showPaymentList}"></p>
+<p th:replace="~{fragments::editUserData}"></p>
 <div align="center" th:each="car : ${carList}">
     <div id="avrDiv" class="warning">
         <a th:href="@{/car/{id}.html(id=${car.id})}">
@@ -28,8 +30,8 @@
                 engine description: <span th:text="${car.engineDescription}"></span><br>
                 transmission: <span th:text="${car.transmission}"></span><br>
                 price: <span th:text="${car.price}"></span><br>
-                <span th:style="${car.isOrdered == 1} ? 'color: red': 'color: green'"
-                      th:text="${car.isOrdered == 1} ? 'unavailable':'available'"></span><br><br>
+                <span th:style="${car.isOrder == 0} ? 'color: green':'color: red'"
+                      th:text="${car.isOrder == 0} ? 'available':'unavailable'"></span><br><br>
             </div>
         </a>
     </div><br>

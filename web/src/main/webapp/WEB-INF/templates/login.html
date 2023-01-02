@@ -13,6 +13,8 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"
           rel="stylesheet"
           crossorigin="anonymous"/>
+    <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
@@ -30,7 +32,13 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>
+<p class="form-signin">
+    <a th:href="@{/registration.html}">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+            Sing up
+        </button>
+    </a>
+</p>
 <p align="center" style="color:red" th:text="${error}"></p>
-<div th:replace="fragments::registration"></div>
 </body>
 </html>

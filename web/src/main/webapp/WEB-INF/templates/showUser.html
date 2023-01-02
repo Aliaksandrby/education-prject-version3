@@ -8,6 +8,7 @@
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+<p th:replace="fragments::logout"></p>
 <h1 align="center">User panel</h1>
 <table class="rounded" align="center">
     <tr>
@@ -25,15 +26,10 @@
         <td><span th:each="role : ${user.roleSet}" th:text="${role.name}"></span></td>
     </tr>
 </table>
-
 <h1 align="center">Edit user</h1>
-<div th:replace="fragments::logout"></div>
-<div th:replace="fragments::returnToCarList"></div>
-<br>
-<div th:replace="fragments::returnToUserList"></div>
-<br>
-<div th:replace="fragments::deleteUser"></div>
-<br>
+<p th:replace="~{fragments::returnToCarList}"></p>
+<p th:replace="~{fragments::returnToUserList}"></p>
+<p th:replace="~{fragments::deleteUser}"></p>
 <div align="center">
     <form th:action="@{/admin/edit/user/{id}.html(id=${user.id})}" method="post">
         <label for="username">username: </label><br>

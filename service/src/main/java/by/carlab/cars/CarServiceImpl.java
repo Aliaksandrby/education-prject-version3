@@ -2,8 +2,11 @@ package by.carlab.cars;
 
 import by.carlab.dao.CarDao;
 import by.carlab.dao.ImageDao;
+import by.carlab.dao.OrderDao;
 import by.carlab.model.Car;
 import by.carlab.model.ImageCar;
+import by.carlab.model.Order;
+import by.carlab.orders.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,17 +14,22 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class CarServiceImpl implements CarService {
+
     @Autowired
     private CarDao carDao;
+
     @Autowired
     private ImageDao imageDao;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderDao orderDao;
 
     @Override
     @Transactional
@@ -46,6 +54,15 @@ public class CarServiceImpl implements CarService {
     @Transactional
     public void deleteCar(int id) {
         Car car = carDao.findById(id);
+        List<Order> orderList = orderService.showOrderList();
+        for (Order order : orderList) {
+            if(order.getCar() != null) {
+                if(Objects.equals(order.getCar().getId(), car.getId()) ) {
+                    order.setCar(null);
+                    orderDao.update(order);
+                }
+            }
+        }
         carDao.delete(car);
     }
 

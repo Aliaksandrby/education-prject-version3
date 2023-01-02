@@ -17,13 +17,13 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public void delete(ImageCar imageCar) {
-        ImageCar loadedImageCar = sessionFactory.getCurrentSession().load(ImageCar.class, imageCar.getId());
-        sessionFactory.getCurrentSession().delete(loadedImageCar);
+    public void update(ImageCar imageCar) {
+        sessionFactory.getCurrentSession().update(imageCar);
     }
 
     @Override
-    public void update(ImageCar imageCar) {
-        sessionFactory.getCurrentSession().update(imageCar);
+    public void delete(ImageCar imageCar) {
+        ImageCar loadedImageCar = sessionFactory.getCurrentSession().load(ImageCar.class, imageCar.getId());
+        sessionFactory.getCurrentSession().delete(loadedImageCar);
     }
 }

@@ -1,8 +1,11 @@
 package by.carlab.users;
 
+import by.carlab.dao.OrderDao;
 import by.carlab.dao.RoleDao;
 import by.carlab.dao.UserDao;
+import by.carlab.model.Order;
 import by.carlab.model.User;
+import by.carlab.orders.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Service
@@ -24,6 +28,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderDao orderDao;
 
     @Override
     public User createUser(User user) {
@@ -80,6 +90,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(int id) {
+        User user = userDao.findById(id);
+        List<Order> orderList = orderService.showOrderList();
+        for (Order order : orderList) {
+            if(Objects.equals(order.getUser().getId(), user.getId())) {
+                order.setUser(null);
+                orderDao.update(order);
+            }
+        }
         userDao.delete(id);
     }
 

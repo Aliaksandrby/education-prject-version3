@@ -14,7 +14,7 @@
                 engine_description VARCHAR(200),
                 transmission VARCHAR(100),
                 price FLOAT,
-                is_ordered INT DEFAULT 0
+                is_order INT DEFAULT 0
             );
         </sql>
     </changeSet>
@@ -35,7 +35,7 @@
                 username VARCHAR(255),
                 email VARCHAR(100),
                 password VARCHAR(255),
-                is_ordered INT DEFAULT 0
+                is_order INT DEFAULT 0
             );
         </sql>
     </changeSet>

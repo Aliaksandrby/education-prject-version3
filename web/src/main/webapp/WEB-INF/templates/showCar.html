@@ -11,11 +11,11 @@
 </head>
 <body>
 <h1 align="center" th:text="${car.name}"></h1>
-<div th:replace="fragments::logout"></div>
-<div th:replace="fragments::createOrder"></div>
-<div th:replace="fragments::completeOrder"></div>
-<div th:replace="fragments::deleteCar"></div>
-<div th:replace="fragments::returnToCarList"></div>
+<p th:replace="~{fragments::logout}"></p>
+<p th:replace="~{fragments::createOrder}"></p>
+<p th:replace="~{fragments::completeOrder}"></p>
+<p th:replace="~{fragments::deleteCar}"></p>
+<p th:replace="~{fragments::returnToCarList}"></p>
 <div align="center" id="main">
     <div id="avrDiv" class="warning" th:each="carImage : ${car.imageCarList}">
         <img th:src="${carImage.image.equals('')} ?
@@ -37,7 +37,7 @@
         <td th:text="${car.engineDescription}"></td>
         <td th:text="${car.transmission}"></td>
         <td th:text="${car.price}"></td>
-        <td th:text="${car.isOrdered == 1} ? 'unavailable':'available'"></td>
+        <td th:text="${car.isOrder == 0} ? 'available':'unavailable'"></td>
     </tr>
 </table>
 <div sec:authorize="hasRole('ROLE_ADMIN')">

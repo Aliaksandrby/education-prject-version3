@@ -8,11 +8,9 @@
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <p th:replace="~{fragments::logout}"></p>
     <h1 align="center">UserList panel</h1>
-    <div th:replace="fragments::returnToCarList"></div>
-    <br>
-    <div th:replace="fragments::logout"></div>
-    <br>
+    <p th:replace="~{fragments::returnToCarList}"></p>
     <table class="rounded" align="center">
         <tr>
             <th>id</th>

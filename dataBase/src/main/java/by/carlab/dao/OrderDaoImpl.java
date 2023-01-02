@@ -49,10 +49,13 @@ public class OrderDaoImpl implements OrderDao {
         List<Order> orderList = readAll();
         Order newOrder = null;
         for (Order order : orderList) {
+            if((order.getCar() == null) || (order.getUser() == null)) {
+                continue;
+            }
             if(
                     order.getUser().getUsername().equals(user.getUsername()) &&
-                    user.getIsOrdered() == 1 &&
-                    car.getIsOrdered()==1 &&
+                    user.getIsOrder() == 1 &&
+                    car.getIsOrder()==1 &&
                     order.getCar().getName().equals(car.getName()) &&
                     order.getDateCompleteOrder() == null
             ) {

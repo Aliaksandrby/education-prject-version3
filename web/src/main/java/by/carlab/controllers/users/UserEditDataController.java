@@ -3,6 +3,7 @@ package by.carlab.controllers.users;
 import by.carlab.model.User;
 import by.carlab.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class UserEditDataController {
 
     private int userId;
 
+    @Secured("USER")
     @GetMapping("/user/editUserData.html")
     public String editUser(Principal principal,Model model) {
         User user = userService.findByUsername(principal.getName());
@@ -26,6 +28,7 @@ public class UserEditDataController {
         return "editUserData";
     }
 
+    @Secured("USER")
     @PostMapping("/user/editUserData.html")
     public String editUser(User user,Model model) {
         model.addAttribute("user",userService.editUser(user,userId,1));

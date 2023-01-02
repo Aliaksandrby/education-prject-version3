@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -29,8 +30,11 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "is_ordered")
-    private int isOrdered;
+    @Column(name = "is_order")
+    private int isOrder;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> order;
 
     @Transient
     private String confirmPassword;
