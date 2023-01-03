@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Card panel</title>
+    <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<p th:replace="~{fragments::logout}"></p>
+<h3 align="center">Card panel</h3>
+<p th:replace="~{fragments::returnToCarList}"></p>
+<table class="rounded" align="center">
+    <tr>
+        <th>Card number</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Owner</th>
+        <th>Username</th>
+        <th>Act</th>
+    </tr>
+    <tr th:each="card : ${cardList}">
+        <td th:text="${card.cardNumber}"></td>
+        <td th:text="${card.month}"></td>
+        <td th:text="${card.year}"></td>
+        <td th:text="${card.nameOfCard}"></td>
+        <td th:text="${card.user.username}"></td>
+        <td>
+            <a th:href="@{/card/delete/{id}.html(id=${card.id})}">
+                <button>delete</button>
+            </a>
+        </td>
+    </tr>
+</table>
+<h3 align="center">Add new card</h3>
+<div align="center">
+    <form th:action="@{/card/add/new.html}" method="post">
+        <label for="cardNumber">Card number: </label><br>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="1111-1111-1111-1111" required><br>
+
+        <label for="month">Month: </label><br>
+        <input type="number" id="month" name="month" placeholder="1" min="1" max="12" required><br>
+
+        <label for="year">Year: </label><br>
+        <input type="number" id="year" name="year" placeholder="2022" min="2022" max="2100" required><br>
+
+        <label for="nameOfCard">Name at the card: </label><br>
+        <input type="text" id="nameOfCard" name="nameOfCard" placeholder="John Doe" required><br><br>
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" value="send">
+    </form>
+</div>
+</body>
+</html>

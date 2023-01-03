@@ -34,9 +34,7 @@ public class OrderServiceImpl implements OrderService {
         User user = userDao.findByUsername(username);
         if((car.getIsOrder() == 0) && (user.getIsOrder() == 0)) {
             car.setIsOrder(1);
-            //carDao.update(car);
             user.setIsOrder(1);
-            //userDao.update(user);
             Order order = new Order();
             order.setUser(user);
             order.setCar(car);
@@ -53,11 +51,11 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderDao.findByCarAndUser(user,car);
         if((car.getIsOrder() == 1) && (user.getIsOrder() == 1) && (order != null)) {
             car.setIsOrder(0);
-            //carDao.update(car);
             user.setIsOrder(0);
-            //userDao.update(user);
-            order.setDateCompleteOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
-            //orderDao.update(order);
+            Timestamp timeEndOrder = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3")));
+            Timestamp timeStartOrder = order.getDateOrder();
+            order.setDateCompleteOrder(timeEndOrder);
+            order.setTimeInOrder(evalTimeInOrder(timeStartOrder, timeEndOrder));
         }
         return car;
     }
@@ -76,5 +74,10 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(int id) {
         Order foundOrder = orderDao.findById(id);
         orderDao.delete(foundOrder);
+    }
+
+    private int evalTimeInOrder(Timestamp timeStart,Timestamp timeEnd) {
+        long timeInOrder = ((timeEnd.getTime()-timeStart.getTime())/60000);
+        return (int)timeInOrder;
     }
 }

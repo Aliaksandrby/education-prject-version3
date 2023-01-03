@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
@@ -94,6 +94,12 @@
 <p th:fragment="editUserData" sec:authorize="hasRole('ROLE_USER')" class="p-class">
     <a th:href="@{/user/editUserData.html}">
         <button class="b-class">edit user data</button>
+    </a>
+</p>
+
+<p th:fragment="showCardList" sec:authorize="isAuthenticated()" class="p-class">
+    <a th:href="@{/card/showCardList.html}">
+        <button class="b-class">show cards</button>
     </a>
 </p>
 </body>

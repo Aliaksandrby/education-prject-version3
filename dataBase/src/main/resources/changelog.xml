@@ -78,21 +78,20 @@
                 user_id INT,
                 car_id INT,
                 date_order DATETIME,
-                date_complete_order DATETIME
+                date_complete_order DATETIME,
+                time_in_order INT
             );
         </sql>
     </changeSet>
     <changeSet id="9" author="Aliaksandr.by">
         <sql>
-            CREATE TABLE IF NOT EXISTS t_user_card (
+            CREATE TABLE IF NOT EXISTS t_card (
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 card_number VARCHAR(19),
                 month INT,
                 year INT,
-                code INT,
-                name_card VARCHAR(20),
-                user_id INT,
-                FOREIGN KEY (user_id) REFERENCES t_user (id)
+                name_of_card VARCHAR(100),
+                user_id INT
             );
         </sql>
     </changeSet>

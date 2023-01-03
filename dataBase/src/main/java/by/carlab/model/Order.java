@@ -30,4 +30,7 @@ public class Order {
 
     @Column(name = "date_complete_order")
     private Timestamp dateCompleteOrder;
+
+    @Column(name = "time_in_order")
+    private int timeInOrder;
 }

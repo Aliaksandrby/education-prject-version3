@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
@@ -45,19 +45,19 @@
     <div align="center">
         <form th:action="@{/admin/edit/car/{id}.html(id=${car.id})}" method="post" enctype="multipart/form-data">
             <label for="name">Name car: </label><br>
-            <input type="text" id="name" name="name" th:value="${car.name}"><br>
+            <input type="text" id="name" name="name" th:value="${car.name}" required><br>
 
             <label for="year">Year car: </label><br>
-            <input type="number" id="year" name="year" th:value="${car.year}"><br>
+            <input type="number" id="year" name="year" th:value="${car.year}" required><br>
 
             <label for="engineDescription">Engine Description: </label><br>
-            <input type="text" id="engineDescription" name="engineDescription" th:value="${car.engineDescription}"><br>
+            <input type="text" id="engineDescription" name="engineDescription" th:value="${car.engineDescription}" required><br>
 
             <label for="transmission">Type transmission: </label><br>
-            <input type="text" id="transmission" name="transmission" th:value="${car.transmission}"><br>
+            <input type="text" id="transmission" name="transmission" th:value="${car.transmission}" required><br>
 
             <label for="price">Price: </label><br>
-            <input type="number" id="price" name="price" th:value="${car.price}" min="1" step="0.01"><br>
+            <input type="number" id="price" name="price" th:value="${car.price}" min="1" step="0.01" required><br>
 
             <label for="images">images: </label><br>
             <input type="file" id="images" multiple name="images"><br><br>

@@ -42,8 +42,8 @@ public class User implements UserDetails {
     @Transient
     private String message;
 
-    @OneToOne(mappedBy = "user")
-    private UserCard userCard;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Card> cardList;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "t_user_roles",
