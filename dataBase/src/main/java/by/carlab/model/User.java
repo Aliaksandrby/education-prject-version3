@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @Column(name = "is_order")
     private int isOrder;
 
+    @Column(name = "is_payment")
+    private int isPayment;
+
     @OneToMany(mappedBy = "user")
     private List<Order> order;
 
@@ -43,7 +46,7 @@ public class User implements UserDetails {
     private String message;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Card> cardList;
+    private List<Payment> paymentList;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "t_user_roles",

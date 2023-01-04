@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "t_card")
-public class Card {
+@Table(name = "t_payment")
+public class Payment {
 
     @Id
     @Column(name = "id")
@@ -27,6 +27,9 @@ public class Card {
 
     @Column(name = "name_of_card")
     private String nameOfCard;
+
+    @Transient
+    private int securedCode;
 
     @ManyToOne
     @JoinColumn (name="user_id")

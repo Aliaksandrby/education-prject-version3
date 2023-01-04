@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment panel</title>
+    <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<p th:replace="~{fragments::logout}"></p>
+<h3 align="center">Payment panel</h3>
+<p th:replace="~{fragments::returnToCarList}"></p>
+<table class="rounded" align="center">
+    <tr>
+        <th>id</th>
+        <th>cardNumber</th>
+        <th>month</th>
+        <th>year</th>
+        <th>nameOfCard</th>
+        <th>Username</th>
+    </tr>
+    <tr th:each="payment : ${paymentList}">
+        <td th:text="${payment.id}"></td>
+        <td th:text="${payment.cardNumber}"></td>
+        <td th:text="${payment.month}"></td>
+        <td th:text="${payment.year}"></td>
+        <td th:text="${payment.nameOfCard}"></td>
+        <td th:text="${payment.user.username}"></td>
+    </tr>
+</table>
+</body>
+</html>

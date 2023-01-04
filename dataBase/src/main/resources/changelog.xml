@@ -35,7 +35,8 @@
                 username VARCHAR(255),
                 email VARCHAR(100),
                 password VARCHAR(255),
-                is_order INT DEFAULT 0
+                is_order INT DEFAULT 0,
+                is_payment INT DEFAULT 0
             );
         </sql>
     </changeSet>
@@ -85,7 +86,7 @@
     </changeSet>
     <changeSet id="9" author="Aliaksandr.by">
         <sql>
-            CREATE TABLE IF NOT EXISTS t_card (
+            CREATE TABLE IF NOT EXISTS t_payment (
                 id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
                 card_number VARCHAR(19),
                 month INT,

@@ -29,12 +29,13 @@ public class OrderServiceImpl implements OrderService {
     private UserDao userDao;
 
     @Override
-    public Car createOrder(String username,int carId) { //todo
+    public Car createOrder(String username,int carId) {
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        if((car.getIsOrder() == 0) && (user.getIsOrder() == 0)) {
+        if((car.getIsOrder() == 0) && (user.getIsOrder() == 0) && (user.getIsPayment() == 0)) {
             car.setIsOrder(1);
             user.setIsOrder(1);
+            user.setIsPayment(1);
             Order order = new Order();
             order.setUser(user);
             order.setCar(car);
@@ -45,10 +46,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Car completeOrder(String username, int carId) { //todo
+    public Order completeOrder(String username, int carId) { //todo
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        Order order = orderDao.findByCarAndUser(user,car);
+        Order order = orderDao.findByUsername(username);
         if((car.getIsOrder() == 1) && (user.getIsOrder() == 1) && (order != null)) {
             car.setIsOrder(0);
             user.setIsOrder(0);
@@ -57,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
             order.setDateCompleteOrder(timeEndOrder);
             order.setTimeInOrder(evalTimeInOrder(timeStartOrder, timeEndOrder));
         }
-        return car;
+        return order;
     }
 
     @Override

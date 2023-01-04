@@ -44,7 +44,7 @@
 </p>
 
 <p th:fragment="showPaymentList" sec:authorize="hasRole('ROLE_ADMIN')" class="p-class">
-    <a th:href="@{/admin/showPaymentsList.html}">
+    <a th:href="@{/admin/showPaymentList.html}">
         <button class="b-class">edit/view payments</button>
     </a>
 </p>
@@ -62,7 +62,7 @@
 </p>
 
 <p th:fragment="completeOrder" sec:authorize="isAuthenticated()" class="p-class">
-    <a th:href="@{/order/complete/car/{id}.html(id=${car.id})}">
+    <a th:href="@{/payment/create/car/{id}.html(id=${car.id})}">
         <button class="b-class">complete order</button>
     </a>
 </p>
@@ -94,12 +94,6 @@
 <p th:fragment="editUserData" sec:authorize="hasRole('ROLE_USER')" class="p-class">
     <a th:href="@{/user/editUserData.html}">
         <button class="b-class">edit user data</button>
-    </a>
-</p>
-
-<p th:fragment="showCardList" sec:authorize="isAuthenticated()" class="p-class">
-    <a th:href="@{/card/showCardList.html}">
-        <button class="b-class">show cards</button>
     </a>
 </p>
 </body>
