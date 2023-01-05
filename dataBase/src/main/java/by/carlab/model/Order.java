@@ -33,4 +33,7 @@ public class Order {
 
     @Column(name = "time_in_order")
     private int timeInOrder;
+
+    @Column(name = "is_payment")
+    private int isPayment;
 }

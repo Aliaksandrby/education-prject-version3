@@ -6,10 +6,11 @@
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/input.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <p th:replace="~{fragments::logout}"></p>
-<h3 align="center"><strong>Order panel</strong></h3>
+<h3 align="center">Order panel</h3>
 <p th:replace="~{fragments::deleteOrder}"></p>
 <p th:replace="~{fragments::returnToCarList}"></p>
 <h3 align="center"><strong>Order</strong></h3>
@@ -20,14 +21,42 @@
         <th>Car</th>
         <th>Date order</th>
         <th>Date complete order</th>
+        <th>Time in order (min)</th>
+        <th>Is paid?</th>
+        <th>Act</th>
     </tr>
     <tr>
         <td th:text="${order.id}"></td>
-        <td th:text="${order.user == null} ? 'user does not exist':${order.user.username}"></td>
-        <td th:text="${order.car == null} ? 'car does not exist':${order.car.name}"></td>
+        <td th:text="${order.user} ? ${order.user.username}:'user does not exist'"></td>
+        <td th:text="${order.car} ? ${order.car.name}:'car does not exist'"></td>
         <td th:text="${order.dateOrder}"></td>
         <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
+        <td th:text="${order.timeInOrder}"></td>
+        <td th:text="${order.isPayment == 0} ? 'paid':'not paid'"></td>
+        <td><button>complete order</button></td>
     </tr>
 </table>
+<h3 align="center">Edit order</h3> <!--fixme make complete order - paid=0 and dateCompleteOrder LocalDateTime.now-->
+<div align="center">
+    <form th:action="@{/admin/order/edit/{id}.html(id=${order.id})}" method="post">
+
+        <label for="user">Username: </label><br>
+        <select name="user" id="user" size="width">
+            <option value="1" selected>USER</option>
+            <option value="2">ADMIN</option>
+        </select>
+        <br><br>
+
+        <label for="car">Car: </label><br>
+        <select name="car" id="car">
+            <option value="1" selected>USER</option>
+            <option value="2">ADMIN</option>
+        </select>
+        <br><br>
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="submit" value="send">
+    </form>
+</div>
 </body>
 </html>

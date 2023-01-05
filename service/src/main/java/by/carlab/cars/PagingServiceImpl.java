@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class PagingServiceImpl implements PagingService{
 
     private final int numberOfCarsOnPage = 1;
@@ -15,7 +16,7 @@ public class PagingServiceImpl implements PagingService{
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
+
     @Override
     public List getCarPaging(int currentPage) {
         return sessionFactory
@@ -26,7 +27,6 @@ public class PagingServiceImpl implements PagingService{
                 .list();
     }
 
-    @Transactional
     @Override
     public int getTotalNumbersOfCars() {
         return sessionFactory

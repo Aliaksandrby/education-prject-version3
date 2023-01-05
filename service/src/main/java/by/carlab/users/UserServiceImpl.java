@@ -27,13 +27,10 @@ public class UserServiceImpl implements UserService {
     private RoleDao roleDao;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User createUser(User user) {
@@ -91,7 +88,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int id) {
         User user = userDao.findById(id);
-        List<Order> orderList = orderService.showOrderList();
+        List<Order> orderList = orderDao.readAll();
         for (Order order : orderList) {
             if(Objects.equals(order.getUser().getId(), user.getId())) {
                 order.setUser(null);

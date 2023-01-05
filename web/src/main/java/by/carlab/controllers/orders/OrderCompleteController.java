@@ -1,6 +1,6 @@
-package by.carlab.controllers.pauments;
+package by.carlab.controllers.orders;
 
-import by.carlab.payments.PaymentService;
+import by.carlab.orders.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.security.Principal;
 
 @Controller
-public class PaymentCreateController { //todo
+public class OrderCompleteController {
 
     @Autowired
-    private PaymentService paymentService;
+    private OrderService orderService;
 
     @Secured({"ADMIN","USER"})
-    @GetMapping("/payment/create.html")
-    public String createPayment(Model model, Principal principal) {
-        model.addAttribute("sumToPay",paymentService.createPayment(principal.getName()));
-        return "showPayment";
+    @GetMapping("/order/complete/car/{id}.html")
+    public String completePayment(Model model, Principal principal, @PathVariable("id") int id) {
+        model.addAttribute("car",orderService.completeOrder(principal.getName(),id));
+        return "showCar";
     }
 }

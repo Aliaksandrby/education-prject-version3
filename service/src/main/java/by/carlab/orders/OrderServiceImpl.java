@@ -39,6 +39,7 @@ public class OrderServiceImpl implements OrderService {
             Order order = new Order();
             order.setUser(user);
             order.setCar(car);
+            order.setIsPayment(1);
             order.setDateOrder(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3"))));
             orderDao.create(order);
         }
@@ -46,19 +47,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order completeOrder(String username, int carId) { //todo
+    public Car completeOrder(String username, int carId) {
         Car car = carDao.findById(carId);
         User user = userDao.findByUsername(username);
-        Order order = orderDao.findByUsername(username);
+        Order order = orderDao.findByUsernameAndCar(username,car);
         if((car.getIsOrder() == 1) && (user.getIsOrder() == 1) && (order != null)) {
+            Timestamp timeEndOrder = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3")));
             car.setIsOrder(0);
             user.setIsOrder(0);
-            Timestamp timeEndOrder = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3")));
-            Timestamp timeStartOrder = order.getDateOrder();
             order.setDateCompleteOrder(timeEndOrder);
-            order.setTimeInOrder(evalTimeInOrder(timeStartOrder, timeEndOrder));
+            order.setTimeInOrder(evalTimeInOrder(order.getDateOrder(), timeEndOrder));
         }
-        return order;
+        return car;
     }
 
     @Override

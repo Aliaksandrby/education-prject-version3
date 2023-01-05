@@ -1,5 +1,6 @@
 package by.carlab.dao;
 
+import by.carlab.model.Car;
 import by.carlab.model.Order;
 
 import java.util.List;
@@ -10,5 +11,6 @@ public interface OrderDao {
     void update(Order order);
     void delete(Order order);
     Order findById(int id);
-    Order findByUsername(String username);
+    Order findByUsernameAndCar(String username, Car car);
+    Order findByUsernameAndIsPayment(String username);
 }

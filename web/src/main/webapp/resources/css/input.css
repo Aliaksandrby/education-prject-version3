@@ -1,0 +1,11 @@
+input[type=text]{
+   width:200px;
+}
+
+input[type=number]{
+   width:200px;
+}
+
+select {
+   width: 200px;
+}

@@ -8,12 +8,14 @@
     <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/table.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/input.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1 align="center" th:text="${car.name}"></h1>
 <p th:replace="~{fragments::logout}"></p>
 <p th:replace="~{fragments::createOrder}"></p>
 <p th:replace="~{fragments::completeOrder}"></p>
+<p th:replace="~{fragments::createPayment}"></p>
 <p th:replace="~{fragments::deleteCar}"></p>
 <p th:replace="~{fragments::returnToCarList}"></p>
 <div align="center" id="main">

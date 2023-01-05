@@ -19,14 +19,18 @@
         <th>Car</th>
         <th>Date order</th>
         <th>Date complete order</th>
+        <th>Time in order</th>
+        <th>Is paid?</th>
         <th>Show</th>
     </tr>
     <tr th:each="order : ${orderList}">
         <td th:text="${order.id}"></td>
-        <td th:text="${order.user==null} ? 'user does not exist':${order.user.username}"></td> <!-- FIXME -->
-        <td th:text="${order.car==null} ? 'car does not exist':${order.car.name}"></td>
+        <td th:text="${order.user} ? ${order.user.username}:'user does not exist'"></td>
+        <td th:text="${order.car} ? ${order.car.name}:'car does not exist'"></td>
         <td th:text="${order.dateOrder}"></td>
         <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
+        <td th:text="${order.timeInOrder}"></td>
+        <td th:text="${order.isPayment == 0} ? 'paid':'not paid'"></td>
         <td>
             <a th:href="@{/admin/order/{id}.html(id=${order.id})}">
                 <button>show</button>

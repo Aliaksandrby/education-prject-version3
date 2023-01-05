@@ -80,7 +80,8 @@
                 car_id INT,
                 date_order DATETIME,
                 date_complete_order DATETIME,
-                time_in_order INT
+                time_in_order INT,
+                is_payment INT
             );
         </sql>
     </changeSet>

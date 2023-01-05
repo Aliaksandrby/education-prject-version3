@@ -62,8 +62,14 @@
 </p>
 
 <p th:fragment="completeOrder" sec:authorize="isAuthenticated()" class="p-class">
-    <a th:href="@{/payment/create/car/{id}.html(id=${car.id})}">
+    <a th:href="@{/order/complete/car/{id}.html(id=${car.id})}">
         <button class="b-class">complete order</button>
+    </a>
+</p>
+
+<p th:fragment="createPayment" sec:authorize="isAuthenticated()" class="p-class">
+    <a th:href="@{/payment/create.html}">
+        <button class="b-class">pay order</button>
     </a>
 </p>
 

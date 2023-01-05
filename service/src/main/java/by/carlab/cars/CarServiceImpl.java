@@ -6,7 +6,6 @@ import by.carlab.dao.OrderDao;
 import by.carlab.model.Car;
 import by.carlab.model.ImageCar;
 import by.carlab.model.Order;
-import by.carlab.orders.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
 
 @Service
+@Transactional
 public class CarServiceImpl implements CarService {
 
     @Autowired
@@ -26,13 +29,9 @@ public class CarServiceImpl implements CarService {
     private ImageDao imageDao;
 
     @Autowired
-    private OrderService orderService;
-
-    @Autowired
     private OrderDao orderDao;
 
     @Override
-    @Transactional
     public Car addCar(Car car, MultipartFile[] images) throws IOException {
         carDao.create(car);
         if (!(images.length==1 && Objects.equals(images[0].getOriginalFilename(), ""))) {
@@ -51,10 +50,9 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    @Transactional
     public void deleteCar(int id) {
         Car car = carDao.findById(id);
-        List<Order> orderList = orderService.showOrderList();
+        List<Order> orderList = orderDao.readAll();
         for (Order order : orderList) {
             if(order.getCar() != null) {
                 if(Objects.equals(order.getCar().getId(), car.getId()) ) {
@@ -67,7 +65,6 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    @Transactional
     public Car editCar(Car car, int id, MultipartFile[] images) throws IOException {
         Car car1 = carDao.findById(id);
         car1.setName(car.getName());

@@ -1,15 +1,15 @@
 package by.carlab.dao;
 
+import by.carlab.model.Car;
 import by.carlab.model.Order;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Repository
-@Transactional
 public class OrderDaoImpl implements OrderDao {
 
     @Autowired
@@ -43,14 +43,39 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Order findByUsername(String username) {
+    public Order findByUsernameAndCar(String username, Car car) {
         List<Order> orderList = readAll();
         Order newOrder = null;
         for (Order order : orderList) {
-            if(order.getUser() == null) {
+            if((order.getUser() == null) || (order.getCar() == null)) {
                 continue;
             }
-            if(order.getUser().getUsername().equals(username) && order.getUser().getIsPayment()==1) {
+            if(
+                    (order.getUser().getUsername().equals(username)) &&
+                    (order.getDateCompleteOrder() == null) &&
+                    (Objects.equals(order.getCar().getId(), car.getId()))
+
+            ) {
+                newOrder = order;
+                break;
+            }
+        }
+        return newOrder;
+    }
+
+    @Override
+    public Order findByUsernameAndIsPayment(String username) {
+        List<Order> orderList = readAll();
+        Order newOrder = null;
+        for (Order order : orderList) {
+            if((order.getUser() == null)) {
+                continue;
+            }
+            if(
+                    (order.getUser().getUsername().equals(username)) &&
+                    (order.getIsPayment() == 1)
+
+            ) {
                 newOrder = order;
                 break;
             }
