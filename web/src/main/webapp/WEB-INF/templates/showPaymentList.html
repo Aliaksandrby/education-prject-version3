@@ -19,6 +19,8 @@
         <th>year</th>
         <th>nameOfCard</th>
         <th>Username</th>
+        <th>Amount</th>
+        <th>Act</th>
     </tr>
     <tr th:each="payment : ${paymentList}">
         <td th:text="${payment.id}"></td>
@@ -27,6 +29,12 @@
         <td th:text="${payment.year}"></td>
         <td th:text="${payment.nameOfCard}"></td>
         <td th:text="${payment.user.username}"></td>
+        <td th:text="${payment.sumToPay}"></td>
+        <td>
+            <a th:href="@{/admin/delete/payment/{id}.html(id=${payment.id})}">
+                <button>delete</button>
+            </a>
+        </td>
     </tr>
 </table>
 </body>

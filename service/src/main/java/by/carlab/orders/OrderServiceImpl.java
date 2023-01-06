@@ -62,6 +62,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order completeAnyOrder(int id) {//todo
+        Order order = orderDao.findById(id);
+        Timestamp timeEndOrder = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT+3")));
+        order.setDateCompleteOrder(timeEndOrder);
+        order.setTimeInOrder(evalTimeInOrder(order.getDateOrder(), timeEndOrder));
+        order.setIsPayment(0);
+
+        order.getCar().setIsOrder(0);
+        order.getUser().setIsOrder(0);
+        order.getUser().setIsPayment(0);//
+
+        return order;
+    }
+
+    @Override
     public List<Order> showOrderList() {
         return orderDao.readAll();
     }

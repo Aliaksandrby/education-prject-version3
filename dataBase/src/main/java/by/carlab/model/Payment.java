@@ -34,4 +34,7 @@ public class Payment {
     @ManyToOne
     @JoinColumn (name="user_id")
     private User user;
+
+    @Column(name = "sum_to_pay")
+    private double sumToPay;
 }

@@ -33,7 +33,11 @@
         <td th:text="${order.dateCompleteOrder} ? ${order.dateCompleteOrder}:'not completed'"></td>
         <td th:text="${order.timeInOrder}"></td>
         <td th:text="${order.isPayment == 0} ? 'paid':'not paid'"></td>
-        <td><button>complete order</button></td>
+        <td>
+            <a th:href="@{/admin/order/complete/{id}.html(id=${order.id})}">
+                <button>complete order</button>
+            </a>
+        </td>
     </tr>
 </table>
 <h3 align="center">Edit order</h3> <!--fixme make complete order - paid=0 and dateCompleteOrder LocalDateTime.now-->

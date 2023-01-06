@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
 
 @Controller
-public class PaymentCompleteController { //todo
+public class PaymentCompleteController {
 
     @Autowired
     private PaymentService paymentService;

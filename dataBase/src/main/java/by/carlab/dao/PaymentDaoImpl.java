@@ -1,5 +1,6 @@
 package by.carlab.dao;
 
+import by.carlab.model.Order;
 import by.carlab.model.Payment;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class PaymentDaoImpl implements PaymentDao {
     public void delete(Payment payment) {
         Payment loadedPayment = sessionFactory.getCurrentSession().load(Payment.class, payment.getId());
         sessionFactory.getCurrentSession().delete(loadedPayment);
+    }
+
+    @Override
+    public Payment findById(int id) {
+        return sessionFactory.getCurrentSession().get(Payment.class, id);
     }
 }

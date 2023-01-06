@@ -93,7 +93,8 @@
                 month INT,
                 year INT,
                 name_of_card VARCHAR(100),
-                user_id INT
+                user_id INT,
+                sum_to_pay FLOAT
             );
         </sql>
     </changeSet>

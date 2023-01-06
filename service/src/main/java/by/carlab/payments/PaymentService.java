@@ -8,4 +8,5 @@ public interface PaymentService {
     double createPayment(String username);
     void completePayment(String username,Payment payment);
     List<Payment> readAll();
+    void delete(int id);
 }

@@ -11,4 +11,5 @@ public interface OrderService {
     List<Order> showOrderList();
     Order getOrder(int id);
     void deleteOrder(int id);
+    Order completeAnyOrder(int id);
 }

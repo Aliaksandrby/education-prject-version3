@@ -49,4 +49,10 @@ public class PaymentServiceImpl implements PaymentService {
     public List<Payment> readAll() {
         return paymentDao.readAll();
     }
+
+    @Override
+    public void delete(int id) {
+        Payment payment = paymentDao.findById(id);
+        paymentDao.delete(payment);
+    }
 }
