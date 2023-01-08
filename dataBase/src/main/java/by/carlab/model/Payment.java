@@ -1,5 +1,6 @@
 package by.carlab.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,6 +32,7 @@ public class Payment {
     @Transient
     private int securedCode;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn (name="user_id")
     private User user;

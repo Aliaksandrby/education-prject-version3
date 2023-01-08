@@ -1,6 +1,5 @@
 package by.carlab.dao;
 
-import by.carlab.model.Order;
 import by.carlab.model.Payment;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

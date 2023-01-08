@@ -5,7 +5,6 @@ import by.carlab.dao.RoleDao;
 import by.carlab.dao.UserDao;
 import by.carlab.model.Order;
 import by.carlab.model.User;
-import by.carlab.orders.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,6 +18,10 @@ import java.util.Set;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+
+    private final static String usernameError = "username exists";
+    private final static String emailError = "email exists";
+    private final static String confirmError = "wrong confirm password";
 
     @Autowired
     private UserDao userDao;
@@ -36,15 +39,15 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user) {
         User userNew = new User();
         if(hasUsernameIntoDB(user)) {
-            userNew.setMessage("username exists");
+            userNew.setMessage(usernameError);
             return userNew;
         }
         if(hasEmailIntoDB(user)) {
-            userNew.setMessage("email exists");
+            userNew.setMessage(emailError);
             return userNew;
         }
         if(isPasswordEqualsToConfirmPassword(user)) {
-            userNew.setMessage("wrong confirm password");
+            userNew.setMessage(confirmError);
             return userNew;
         }
         userNew.setUsername(user.getUsername());
@@ -103,18 +106,18 @@ public class UserServiceImpl implements UserService {
         User editUser = userDao.findById(id);
         if(!editUser.getUsername().equals(user.getUsername())) {
             if(hasUsernameIntoDB(user)) {
-                editUser.setMessage("username exists");
+                editUser.setMessage(usernameError);
                 return editUser;
             }
         }
         if(!editUser.getEmail().equals(user.getEmail())) {
             if(hasEmailIntoDB(user)) {
-                editUser.setMessage("email exists");
+                editUser.setMessage(emailError);
                 return editUser;
             }
         }
         if(isPasswordEqualsToConfirmPassword(user)) {
-            editUser.setMessage("wrong confirm password");
+            editUser.setMessage(confirmError);
             return editUser;
         }
         editUser.setUsername(user.getUsername());

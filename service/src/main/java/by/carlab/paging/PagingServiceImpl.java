@@ -1,5 +1,6 @@
-package by.carlab.cars;
+package by.carlab.paging;
 
+import by.carlab.dao.CarDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,14 @@ public class PagingServiceImpl implements PagingService{
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Autowired
+    private CarDao carDao;
+
 
     @Override
     public List getCarPaging(int currentPage) {
         return sessionFactory
-                .openSession()
+                .getCurrentSession()
                 .createQuery("from Car")
                 .setFirstResult(numberOfCarsOnPage*(currentPage-1))
                 .setMaxResults(numberOfCarsOnPage)
@@ -29,11 +33,7 @@ public class PagingServiceImpl implements PagingService{
 
     @Override
     public int getTotalNumbersOfCars() {
-        return sessionFactory
-                .openSession()
-                .createQuery("from Car")
-                .list()
-                .size();
+        return carDao.readAll().size();
     }
 
     @Override

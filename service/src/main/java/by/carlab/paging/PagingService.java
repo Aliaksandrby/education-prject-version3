@@ -1,4 +1,4 @@
-package by.carlab.cars;
+package by.carlab.paging;
 
 import java.util.List;
 

@@ -8,6 +8,7 @@ import by.carlab.model.ImageCar;
 import by.carlab.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,6 +80,17 @@ public class CarServiceImpl implements CarService {
             car1.setImageCarList(imageCarList);
         }
         return carDao.findById(car1.getId());
+    }
+
+    @Override
+    public List<Car> getCars() {
+        return carDao.readAll();
+    }
+
+    @Override
+    @Transactional
+    public Car getCar(int id) {
+        return carDao.findById(id);
     }
 
     private void deleteAllImagesFromTheCar(Car car) {

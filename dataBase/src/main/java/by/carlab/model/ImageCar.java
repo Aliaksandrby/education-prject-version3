@@ -1,5 +1,6 @@
 package by.carlab.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class ImageCar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne (fetch=FetchType.EAGER)
+    @JsonIgnore
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn (name="car_id")
     private Car car;
 
