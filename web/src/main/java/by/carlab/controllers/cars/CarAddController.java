@@ -17,13 +17,13 @@ public class CarAddController {
     @Autowired
     private CarService carService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/add/car.html")
     public String addCar() {
         return "formForNewCar";
     }
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping("/admin/add/car.html")
     public String createCar(Car car, Model model, @RequestParam("images") MultipartFile[] images) throws IOException {
         model.addAttribute("car",carService.addCar(car, images));

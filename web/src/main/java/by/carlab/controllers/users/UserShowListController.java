@@ -13,7 +13,7 @@ public class UserShowListController {
     @Autowired
     private UserService userService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/showUserList.html")
     public String showUserList(Model model) {
         model.addAttribute("userList",userService.readAll());

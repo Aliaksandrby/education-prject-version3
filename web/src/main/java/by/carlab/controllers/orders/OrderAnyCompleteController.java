@@ -15,7 +15,7 @@ public class OrderAnyCompleteController { // todo
     @Autowired
     private OrderService orderService;
 
-    @Secured({"ADMIN"})
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/order/complete/{id}.html")
     public String completeAnyOrder(Model model, Principal principal, @PathVariable("id") int id) {
         model.addAttribute("order",orderService.completeAnyOrder(id));

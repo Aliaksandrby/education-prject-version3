@@ -15,7 +15,7 @@ public class PaymentCreateController { //todo
     @Autowired
     private PaymentService paymentService;
 
-    @Secured({"ADMIN","USER"})
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
     @GetMapping("/payment/create.html")
     public String createPayment(Model model, Principal principal) {
         model.addAttribute("sumToPay",paymentService.createPayment(principal.getName()));

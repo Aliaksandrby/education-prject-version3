@@ -13,7 +13,7 @@ public class UserDeleteController {
     @Autowired
     private UserService userService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/delete/user/{id}.html")
     public String deleteUser(@PathVariable("id") int id) {
         userService.deleteUser(id);

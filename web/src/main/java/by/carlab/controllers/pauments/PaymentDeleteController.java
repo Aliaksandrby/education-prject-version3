@@ -16,7 +16,7 @@ public class PaymentDeleteController { //todo
     private PaymentService paymentService;
 
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/delete/payment/{id}.html")
     public String deletePayment(Model model, @PathVariable("id") int id) {
         paymentService.delete(id);

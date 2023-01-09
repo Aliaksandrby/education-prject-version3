@@ -16,7 +16,7 @@ public class OrderCompleteController {
     @Autowired
     private OrderService orderService;
 
-    @Secured({"ADMIN","USER"})
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
     @GetMapping("/order/complete/car/{id}.html")
     public String completePayment(Model model, Principal principal, @PathVariable("id") int id) {
         model.addAttribute("car",orderService.completeOrder(principal.getName(),id));

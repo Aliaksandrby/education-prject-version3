@@ -13,7 +13,7 @@ public class OrderDeleteController {
     @Autowired
     private OrderService orderService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/delete/order/{id}.html")
     public String deleteOrder(@PathVariable("id") int id){
         orderService.deleteOrder(id);

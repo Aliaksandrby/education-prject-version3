@@ -14,7 +14,7 @@ public class OrderShowController {
     @Autowired
     private OrderService orderService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/order/{id}.html")
     public String showOrder(Model model, @PathVariable("id") int id) {
         model.addAttribute("order",orderService.getOrder(id));

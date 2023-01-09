@@ -14,7 +14,7 @@ public class UserShowController {
     @Autowired
     private UserService userService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/user/{id}.html")
     public String showUser(Model model, @PathVariable("id") int id) {
         model.addAttribute("user",userService.findById(id));

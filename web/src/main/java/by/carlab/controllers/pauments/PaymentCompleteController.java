@@ -15,7 +15,7 @@ public class PaymentCompleteController {
     @Autowired
     private PaymentService paymentService;
 
-    @Secured({"ADMIN","USER"})
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
     @PostMapping("/payment/complete.html")
     public String completePayment(Payment payment, Principal principal) {
         paymentService.completePayment(principal.getName(),payment);

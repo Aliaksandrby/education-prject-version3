@@ -13,7 +13,7 @@ public class OrderShowListController {
     @Autowired
     private OrderService orderService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/showOrderList.html")
     public String showOrderList(Model model) {
         model.addAttribute("orderList",orderService.showOrderList());

@@ -16,7 +16,7 @@ public class OrderCreateController {
     @Autowired
     private OrderService orderService;
 
-    @Secured({"ADMIN","USER"})
+    @Secured({"ROLE_ADMIN","ROLE_USER"})
     @GetMapping("/order/create/car/{id}.html")
     public String createOrder(Model model, @PathVariable("id") int id, Principal principal) {
         model.addAttribute("car",orderService.createOrder(principal.getName(),id));

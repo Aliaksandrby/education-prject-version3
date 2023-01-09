@@ -19,7 +19,7 @@ public class UserEditDataController {
 
     private int userId;
 
-    @Secured("USER")
+    @Secured("ROLE_USER")
     @GetMapping("/user/editUserData.html")
     public String editUser(Principal principal,Model model) {
         User user = userService.findByUsername(principal.getName());
@@ -28,7 +28,7 @@ public class UserEditDataController {
         return "editUserData";
     }
 
-    @Secured("USER")
+    @Secured("ROLE_USER")
     @PostMapping("/user/editUserData.html")
     public String editUser(User user,Model model) {
         model.addAttribute("user",userService.editUser(user,userId,1));

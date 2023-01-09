@@ -14,7 +14,7 @@ public class PaymentShowListController { //todo
     private PaymentService paymentService;
 
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @GetMapping("/admin/showPaymentList.html")
     public String showPaymentList(Model model) {
         model.addAttribute("paymentList",paymentService.readAll());

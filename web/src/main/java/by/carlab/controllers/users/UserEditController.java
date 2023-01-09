@@ -15,7 +15,7 @@ public class UserEditController {
     @Autowired
     private UserService userService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping("/admin/edit/user/{id}.html")
     public String editUser(User user,int roleId, Model model, @PathVariable("id") int id) {
         model.addAttribute("user",userService.editUser(user,id,roleId));

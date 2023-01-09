@@ -19,7 +19,7 @@ public class CarEditController {
     @Autowired
     private CarService carService;
 
-    @Secured("ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping("/admin/edit/car/{id}.html")
     public String editCar(Car car, Model model, @PathVariable("id") int id,
                           @RequestParam("images") MultipartFile[] images) throws IOException {

@@ -31,7 +31,7 @@ public class CarShowListController {
         return "showCarList";
     }
 
-    @GetMapping("/rest")
+    @GetMapping("/rest")//todo delete this method , it doesn't need
     public String showCarListRest() {
         return "redirect:/rest/1.html";
     }
