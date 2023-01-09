@@ -3,7 +3,7 @@ package by.carlab.controllers.cars;
 import by.carlab.cars.CarService;
 import by.carlab.model.Car;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ public class CarEditController {
     @Autowired
     private CarService carService;
 
-    @Secured("ROLE_ADMIN")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin/edit/car/{id}.html")
     public String editCar(Car car, Model model, @PathVariable("id") int id,
                           @RequestParam("images") MultipartFile[] images) throws IOException {
