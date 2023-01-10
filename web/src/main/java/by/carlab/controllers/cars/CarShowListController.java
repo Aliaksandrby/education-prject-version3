@@ -6,9 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 @Controller
 public class CarShowListController {
@@ -29,16 +26,5 @@ public class CarShowListController {
         model.addAttribute("numberOfPages", pagingService.getNumberOfPages());
         model.addAttribute("carList", pagingService.getCarPaging(currentPage));
         return "showCarList";
-    }
-
-    @GetMapping("/rest")//todo delete this method , it doesn't need
-    public String showCarListRest() {
-        return "redirect:/rest/1.html";
-    }
-
-    @GetMapping("/rest/{currentPage}.html")
-    @ResponseBody
-    public List viewCarList(@PathVariable("currentPage") int currentPage) {
-        return pagingService.getCarPaging(currentPage);
     }
 }

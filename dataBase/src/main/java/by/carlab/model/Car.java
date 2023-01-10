@@ -1,9 +1,6 @@
 package by.carlab.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -36,7 +33,7 @@ public class Car {
     private double price;
 
     @OneToMany(mappedBy = "car")
-    private List<Order> order;
+    private List<Order> orderList;
 
     @Column(name = "is_order")
     private int isOrder;

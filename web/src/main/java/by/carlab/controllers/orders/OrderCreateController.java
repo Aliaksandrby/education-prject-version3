@@ -1,8 +1,9 @@
 package by.carlab.controllers.orders;
 
 import by.carlab.orders.OrderService;
+import by.carlab.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,13 @@ public class OrderCreateController {
     @Autowired
     private OrderService orderService;
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/order/create/car/{id}.html")
+    @Secured(value = {"ROLE_ADMIN","ROLE_USER"})
     public String createOrder(Model model, @PathVariable("id") int id, Principal principal) {
+        model.addAttribute("user",userService.findByUsername(principal.getName()));
         model.addAttribute("car",orderService.createOrder(principal.getName(),id));
         return "showCar";
     }

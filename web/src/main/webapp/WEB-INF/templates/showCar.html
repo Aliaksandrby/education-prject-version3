@@ -32,7 +32,8 @@
         <th>Engine description</th>
         <th>Type transmission</th>
         <th>Price per day</th>
-        <th>Is ordered</th>
+        <th>Is available?</th>
+        <th>Is ordered?</th>
     </tr>
     <tr>
         <td th:text="${car.year}"></td>
@@ -40,6 +41,7 @@
         <td th:text="${car.transmission}"></td>
         <td th:text="${car.price}"></td>
         <td th:text="${car.isOrder == 0} ? 'available':'unavailable'"></td>
+        <td th:text="${user.isOrder == 0} ? 'yes':'no'"></td>
     </tr>
 </table>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
