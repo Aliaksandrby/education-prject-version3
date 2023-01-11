@@ -102,5 +102,11 @@
         <button class="b-class">edit user data</button>
     </a>
 </p>
+
+<p th:fragment="showOwnOrder" sec:authorize="isAuthenticated()" class="p-class">
+    <a th:href="@{/order/showOwnOrder.html}">
+        <button class="b-class">show own order</button>
+    </a>
+</p>
 </body>
 </html>

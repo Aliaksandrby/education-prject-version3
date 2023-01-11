@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -75,6 +76,20 @@ public class OrderServiceImpl implements OrderService {
             order.getUser().setIsPayment(0);
         }
         return order;
+    }
+
+    @Override
+    public Order findOrderByUsername(String username) {
+        User user = userDao.findByUsername(username);
+        Order newOrder = null;
+        List<Order> orderList = user.getOrder();
+        for (Order order : orderList) {
+            if(Objects.equals(order.getDateCompleteOrder(), null)) {
+                newOrder = order;
+                break;
+            }
+        }
+        return newOrder;
     }
 
     @Override

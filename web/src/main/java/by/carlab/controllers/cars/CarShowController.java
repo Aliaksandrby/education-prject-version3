@@ -16,12 +16,8 @@ public class CarShowController {
     @Autowired
     private CarService carService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/car/{id}.html")
-    public String viewCar(Model model, @PathVariable("id") int id, Principal principal) {
-        model.addAttribute("user",userService.findByUsername(principal.getName()));
+    public String viewCar(Model model, @PathVariable("id") int id) {
         model.addAttribute("car",carService.getCar(id));
         return "showCar";
     }

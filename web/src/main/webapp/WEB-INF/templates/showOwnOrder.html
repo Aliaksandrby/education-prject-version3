@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Own order panel</title>
+    <link th:href="@{/resources/css/teg_a.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/resources/css/button.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<p th:replace="~{fragments::logout}"></p>
+<p th:replace="~{fragments::returnToCarList}"></p>
+<h3 align="center">Own order panel</h3>
+<p align="center" th:text="${order} ? ${order.user.username}:'The car was not ordered'"></p>
+<p align="center" th:text="${order} ? ${order.car.name}:''"></p>
+<p align="center" th:text="${order} ? ${order.dateOrder}:''"></p>
+</body>
+</html>

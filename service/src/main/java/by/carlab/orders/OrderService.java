@@ -12,4 +12,5 @@ public interface OrderService {
     Order getOrder(int id);
     void deleteOrder(int id);
     Order completeAnyOrder(int id);
+    Order findOrderByUsername(String username);
 }

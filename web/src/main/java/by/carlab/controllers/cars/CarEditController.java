@@ -21,14 +21,10 @@ public class CarEditController {
     @Autowired
     private CarService carService;
 
-    @Autowired
-    private UserService userService;
-
     @PostMapping("/admin/edit/car/{id}.html")
     @Secured(value = {"ROLE_ADMIN"})
     public String editCar(Car car, Model model, @PathVariable("id") int id,
-                          @RequestParam("images") MultipartFile[] images, Principal principal) throws IOException {
-        model.addAttribute("user",userService.findByUsername(principal.getName()));
+                          @RequestParam("images") MultipartFile[] images) throws IOException {
         model.addAttribute("car",carService.editCar(car,id,images));
         return "showCar";
     }

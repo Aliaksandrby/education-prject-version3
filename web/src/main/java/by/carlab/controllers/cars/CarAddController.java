@@ -21,9 +21,6 @@ public class CarAddController {
     @Autowired
     private CarService carService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/admin/add/car.html")
     @Secured(value = {"ROLE_ADMIN"})
     public String addCar() {
@@ -32,8 +29,7 @@ public class CarAddController {
 
     @PostMapping("/admin/add/car.html")
     @Secured(value = {"ROLE_ADMIN"})
-    public String createCar(Car car, Model model, @RequestParam("images") MultipartFile[] images, Principal principal) throws IOException {
-        model.addAttribute("user",userService.findByUsername(principal.getName()));
+    public String createCar(Car car, Model model, @RequestParam("images") MultipartFile[] images) throws IOException {
         model.addAttribute("car",carService.addCar(car, images));
         return "showCar";
     }

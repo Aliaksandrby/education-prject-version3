@@ -1,5 +1,6 @@
 package by.carlab.controllers.orders;
 
+import by.carlab.model.User;
 import by.carlab.orders.OrderService;
 import by.carlab.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,11 @@ public class OrderCreateController {
     @GetMapping("/order/create/car/{id}.html")
     @Secured(value = {"ROLE_ADMIN","ROLE_USER"})
     public String createOrder(Model model, @PathVariable("id") int id, Principal principal) {
-        model.addAttribute("user",userService.findByUsername(principal.getName()));
+        User user = userService.findByUsername(principal.getName());
+        if(user.getIsPayment()==1) {
+            model.addAttribute("pay","Please pay previous the car");
+            return "payPreviousCar";
+        }
         model.addAttribute("car",orderService.createOrder(principal.getName(),id));
         return "showCar";
     }
