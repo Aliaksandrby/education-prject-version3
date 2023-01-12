@@ -13,7 +13,7 @@ public class CarDeleteRestController {
     @Autowired
     private CarService carService;
 
-    //curl localhost:8080/rent/rest/admin/delete/car/i.html
+    //curl -s http://localhost:8080/rent/rest/admin/delete/car/i.html --user username:password
 
     @GetMapping("/rest/admin/delete/car/{id}.html")
     @Secured(value = {"ROLE_ADMIN"})
