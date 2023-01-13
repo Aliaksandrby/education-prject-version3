@@ -13,4 +13,5 @@ public interface OrderService {
     void deleteOrder(int id);
     Order completeAnyOrder(int id);
     Order findOrderByUsername(String username);
+    boolean isCarInOrder(int carId);
 }

@@ -1,5 +1,6 @@
 package by.carlab.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -37,7 +38,7 @@ public class User implements UserDetails {
     private int isPayment;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> order;
+    private List<Order> orderList;
 
     @Transient
     private String confirmPassword;
@@ -60,21 +61,25 @@ public class User implements UserDetails {
         return getRoleSet();
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;

@@ -82,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
     public Order findOrderByUsername(String username) {
         User user = userDao.findByUsername(username);
         Order newOrder = null;
-        List<Order> orderList = user.getOrder();
+        List<Order> orderList = user.getOrderList();
         for (Order order : orderList) {
             if(Objects.equals(order.getDateCompleteOrder(), null)) {
                 newOrder = order;
@@ -90,6 +90,21 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         return newOrder;
+    }
+
+    @Override
+    public boolean isCarInOrder(int carId) {
+        Car car = carDao.findById(carId);
+        List<Order> orderList = car.getOrderList();
+        if(orderList == null) {
+            return false;
+        }
+        for (Order order : orderList) {
+            if(Objects.equals(order.getDateCompleteOrder(), null)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
