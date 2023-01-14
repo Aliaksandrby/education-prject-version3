@@ -8,8 +8,10 @@ import java.util.List;
 
 public interface CarService {
     Car addCar(Car car, MultipartFile[] images)throws IOException;
+    void addRestCar(Car car);
     void deleteCar(int id);
     Car editCar(Car car, int id, MultipartFile[] images) throws IOException;
+    void editRestCar(int id, String name, Integer year, String engineDescription, String transmission, Double price);
     List<Car> getCars();
     Car getCar(int id);
 }

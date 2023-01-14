@@ -1,5 +1,6 @@
 package by.carlab.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,9 +33,11 @@ public class Car {
     @Column(name = "price")
     private double price;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "car")
     private List<Order> orderList;
 
+    @JsonIgnore
     @Column(name = "is_order")
     private int isOrder;
 
