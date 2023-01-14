@@ -32,52 +32,23 @@ public class CarServiceImpl implements CarService {
     public Car addCar(Car car, MultipartFile[] images) throws IOException {
         carDao.create(car);
         if (!(images.length==1 && Objects.equals(images[0].getOriginalFilename(), ""))) {
-            List<ImageCar> imageCarList = addImagesToCar(car,images);
-            car.setImageCarList(imageCarList);
+            car.setImageCarList(addImagesToCar(car,images));
         } else {
-            ImageCar imageCar = new ImageCar();
-            imageCar.setCar(car);
-            File file = new File("/img/noAuto.png");
-            byte[] image = new byte[(int)file.length()];
-            imageCar.setImage(Base64.getEncoder().encodeToString(image));
-            imageDao.create(imageCar);
-            car.setImageCarList(List.of(imageCar));
+            createEmptyImage(car);
         }
         return carDao.findById(car.getId());
     }
 
     @Override
     public void addRestCar(Car car) {
-        if(car.getName() == null || car.getName().length() == 0) {
-            car.setName("Tesla");
-        }
-        if(car.getYear() < 1900) {
-            car.setYear(2023);
-        }
-
-        if(car.getEngineDescription() == null || car.getEngineDescription().length() == 0) {
-            car.setEngineDescription("85kw");
-        }
-
-        if(car.getTransmission() == null || car.getTransmission().length() == 0) {
-            car.setTransmission("automatic");
-        }
-
-        if(car.getPrice() < 0) {
-            car.setPrice(5);
-        }
-
+        if(car.getName() == null) car.setName("Tesla");
+        if(car.getYear() < 1900) car.setYear(2023);
+        if(car.getEngineDescription() == null) car.setEngineDescription("85kw");
+        if(car.getTransmission() == null) car.setTransmission("automatic");
+        if(car.getPrice() < 0) car.setPrice(1);
         car.setOrderList(null);
         car.setIsOrder(0);
-
-        ImageCar imageCar = new ImageCar();
-        imageCar.setCar(car);
-        File file = new File("/img/noAuto.png");
-        byte[] image = new byte[(int)file.length()];
-        imageCar.setImage(Base64.getEncoder().encodeToString(image));
-        imageDao.create(imageCar);
-        car.setImageCarList(List.of(imageCar));
-
+        createEmptyImage(car);
         carDao.create(car);
     }
 
@@ -107,35 +78,20 @@ public class CarServiceImpl implements CarService {
         carDao.update(car1);
         if (!(images.length == 1 && Objects.equals(images[0].getOriginalFilename(), ""))) {
             deleteAllImagesFromTheCar(car1);
-            List<ImageCar> imageCarList = addImagesToCar(car1,images);
-            car1.setImageCarList(imageCarList);
+            car1.setImageCarList(addImagesToCar(car1,images));
         }
         return carDao.findById(car1.getId());
     }
 
     @Override
-    public void editRestCar(int id, String name, Integer year, String engineDescription, String transmission, Double price) {
+    public void editRestCar(int id, String name, Integer year, String engineDescription,
+                            String transmission, Double price) {
         Car car = carDao.findById(id);
-
-        if(name != null) {
-            if(name.length() > 0) car.setName(name);
-        }
-
-        if(year != null) {
-            if(year > 1900) car.setYear(year);
-        }
-
-        if(engineDescription != null) {
-            if(engineDescription.length() > 0) car.setEngineDescription(engineDescription);
-        }
-
-        if(transmission != null) {
-            if(transmission.length() > 0) car.setTransmission(transmission);
-        }
-
-        if(price != null) {
-            if(price > 1) car.setPrice(price);
-        }
+        if(name != null) if(name.length() > 0) car.setName(name);
+        if(year != null) if(year > 1900) car.setYear(year);
+        if(engineDescription != null) if(engineDescription.length() > 0) car.setEngineDescription(engineDescription);
+        if(transmission != null) if(transmission.length() > 0) car.setTransmission(transmission);
+        if(price != null) if(price > 1) car.setPrice(price);
     }
 
     @Override
@@ -164,5 +120,15 @@ public class CarServiceImpl implements CarService {
             imageDao.create(imageCar);
         }
         return imageCarList;
+    }
+
+    private void createEmptyImage(Car car) {
+        ImageCar imageCar = new ImageCar();
+        imageCar.setCar(car);
+        File file = new File("/img/noAuto.png");
+        byte[] image = new byte[(int)file.length()];
+        imageCar.setImage(Base64.getEncoder().encodeToString(image));
+        imageDao.create(imageCar);
+        car.setImageCarList(List.of(imageCar));
     }
 }
