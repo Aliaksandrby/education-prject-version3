@@ -4,9 +4,12 @@ import by.carlab.cars.CarService;
 import by.carlab.model.Car;
 import by.carlab.orders.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -39,11 +42,16 @@ public class CarRestController {
         }
     }
 
-    // curl  -H 'Content-Type: application/json' --data '{"name":"Tesla","year":2014,"engineDescription":"85kW","transmission":"automatic","price":5.0,"orderList":[],"isOrder":0,"imageCarList":[{"image":""}]}' http://localhost:8080/rent/rest/admin/add/car.html --user admin:admin
-    @PostMapping("/rest/admin/add/car.html")
+
+    //curl -X POST -H 'Content-Type: multipart/form-data' -F 'image=@c:/Users/Hello/Desktop/java/project/basket/car/1/1.jpg' 'http://localhost:8080/rent/rest/admin/add/car.html?name=Tesla&year=2014&engineDescription=85kW&transmission=automatic&price=5' --user admin:admin
+    @PostMapping(path = "/rest/admin/add/car.html", consumes = "multipart/form-data", produces = "application/json;charset=utf-8")
     @Secured(value = {"ROLE_ADMIN"})
-    public void createCar(@RequestBody Car car) {
-        carService.addRestCar(car);
+    public void createCar(@RequestParam(value = "image",required = false) MultipartFile[] images,
+                          @ModelAttribute Car car) throws IOException {
+        for (MultipartFile m:images) {
+            System.out.println(m);
+        }
+        //carService.addRestCar(car,image);
     }
 
     //curl -X PUT "http://localhost:8080/rent/rest/admin/edit/car/34.html?year=2011&name=aaaaaaaa&engineDescription=tutu" --user admin:admin

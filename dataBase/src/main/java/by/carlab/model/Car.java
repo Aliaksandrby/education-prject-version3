@@ -33,11 +33,9 @@ public class Car {
     @Column(name = "price")
     private double price;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "car")
     private List<Order> orderList;
 
-    @JsonIgnore
     @Column(name = "is_order")
     private int isOrder;
 
