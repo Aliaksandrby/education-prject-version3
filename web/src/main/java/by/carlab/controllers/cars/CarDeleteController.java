@@ -19,7 +19,6 @@ public class CarDeleteController {
     private OrderService orderService;
 
     //localhost:8080/rent/admin/delete/car/i.html
-
     @GetMapping("/admin/delete/car/{id}.html")
     @Secured(value = {"ROLE_ADMIN"})
     public String deleteCar(Model model, @PathVariable("id") int id) {

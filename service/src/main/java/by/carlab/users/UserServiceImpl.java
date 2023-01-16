@@ -92,12 +92,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int id) {
         User user = userDao.findById(id);
-        List<Order> orderList = orderDao.readAll();
+        List<Order> orderList = user.getOrderList();
         for (Order order : orderList) {
-            if(Objects.equals(order.getUser().getId(), user.getId())) {
+            //if(Objects.equals(order.getUser().getId(), user.getId())) {
                 order.setUser(null);
                 orderDao.update(order);
-            }
+            //}
         }
         userDao.delete(id);
     }

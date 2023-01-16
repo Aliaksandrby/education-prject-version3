@@ -1,4 +1,4 @@
-package by.carlab.controllers.pauments;
+package by.carlab.controllers.payments;
 
 import by.carlab.payments.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;

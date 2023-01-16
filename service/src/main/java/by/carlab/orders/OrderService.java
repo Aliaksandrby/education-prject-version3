@@ -14,4 +14,5 @@ public interface OrderService {
     Order completeAnyOrder(int id);
     Order findOrderByUsername(String username);
     boolean isCarInOrder(int carId);
+    boolean isUserInOrder(int userId);
 }

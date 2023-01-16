@@ -108,6 +108,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public boolean isUserInOrder(int userId) {
+        User user = userDao.findById(userId);
+        List<Order> orderList = user.getOrderList();
+        if(orderList == null) {
+            return false;
+        }
+        for (Order order : orderList) {
+            if(Objects.equals(order.getDateCompleteOrder(), null)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public List<Order> showOrderList() {
         return orderDao.readAll();
     }

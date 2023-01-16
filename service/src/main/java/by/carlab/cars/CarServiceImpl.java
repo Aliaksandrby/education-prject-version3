@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -36,13 +36,13 @@ public class CarServiceImpl implements CarService {
         if (!(images.length==1 && Objects.equals(images[0].getOriginalFilename(), ""))) {
             car.setImageCarList(addImagesToCar(car,images));
         } else {
-            createImage(car,"/img/noAuto.png");
+            createEmptyImage(car);
         }
         return carDao.findById(car.getId());
     }
 
     @Override
-    public void addRestCar(Car car,MultipartFile image) throws IOException {
+    public void addRestCar(Car car,MultipartFile[] images) throws IOException {
         if(car.getName() == null) car.setName("Tesla");
         if(car.getYear() < 1900) car.setYear(2023);
         if(car.getEngineDescription() == null) car.setEngineDescription("85kw");
@@ -50,32 +50,25 @@ public class CarServiceImpl implements CarService {
         if(car.getPrice() < 0) car.setPrice(1);
         car.setOrderList(null);
         car.setIsOrder(0);
-
-        if(image != null) {
-            ImageCar imageCar = new ImageCar();
-            imageCar.setCar(car);
-            imageCar.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-            imageDao.create(imageCar);
-
-            car.setImageCarList(List.of(imageCar));
+        if(images != null) {
+            car.setImageCarList(addImagesToCar(car,images));
         } else {
-            createImage(car,"/img/noAuto.png");
+            createEmptyImage(car);
         }
-
         carDao.create(car);
     }
 
     @Override
     public void deleteCar(int id) {
         Car car = carDao.findById(id);
-        List<Order> orderList = orderDao.readAll();
+        List<Order> orderList = car.getOrderList();
         for (Order order : orderList) {
-            if(order.getCar() != null) {
-                if(Objects.equals(order.getCar().getId(), car.getId()) ) {
+            //if(order.getCar() != null) {
+              //  if(Objects.equals(order.getCar().getId(), car.getId()) ) {
                     order.setCar(null);
                     orderDao.update(order);
-                }
-            }
+                //}
+            //}
         }
         carDao.delete(car);
     }
@@ -97,14 +90,22 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void editRestCar(int id, String name, Integer year, String engineDescription,
-                            String transmission, Double price) {
+    public void editRestCar(
+            int id, MultipartFile[] images,String name,
+            Integer year, String engineDescription,
+            String transmission, Double price
+    ) throws IOException {
         Car car = carDao.findById(id);
         if(name != null) if(name.length() > 0) car.setName(name);
         if(year != null) if(year > 1900) car.setYear(year);
         if(engineDescription != null) if(engineDescription.length() > 0) car.setEngineDescription(engineDescription);
         if(transmission != null) if(transmission.length() > 0) car.setTransmission(transmission);
         if(price != null) if(price > 1) car.setPrice(price);
+
+        if(images != null) {
+            deleteAllImagesFromTheCar(car);
+            car.setImageCarList(addImagesToCar(car,images));
+        }
     }
 
     @Override
@@ -135,12 +136,10 @@ public class CarServiceImpl implements CarService {
         return imageCarList;
     }
 
-    private void createImage(Car car,String pathToImage) {
+    private void createEmptyImage(Car car) {
         ImageCar imageCar = new ImageCar();
         imageCar.setCar(car);
-        File file = new File(pathToImage);
-        byte[] image = new byte[(int)file.length()];
-        imageCar.setImage(Base64.getEncoder().encodeToString(image));
+        imageCar.setImage("");
         car.setImageCarList(List.of(imageCar));
         imageDao.create(imageCar);
     }
